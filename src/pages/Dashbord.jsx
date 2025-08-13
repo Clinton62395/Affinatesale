@@ -12,32 +12,16 @@ import {
   ArrowLeftRight,
 } from "lucide-react";
 
-export default function Dashboard () {
-  const [isOpen, setIsopen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsopen(!isOpen);
-  };
+export default function Dashboard() {
   return (
     <div className="flex min-h-screen bg-gray-100">
-    
-
       {/* Contenu principal */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b">
           <div className="flex items-center justify-between px-6 py-4">
             <div className="flex items-center">
-              <button
-                onClick={toggleSidebar}
-                className="lg:hidden text-gray-600 hover:text-gray-900 mr-4"
-              >
-                <Menu size={24} />
-              </button>
               <div className="flex items-center">
-                {/* <div className="bg-blue-900 text-white rounded-full w-8 h-8 flex items-center justify-center mr-2">
-                  <span className="text-sm font-bold">A</span>
-                </div> */}
                 <span className="text-blue-900 font-bold text-lg">
                   Learn and Earn
                 </span>

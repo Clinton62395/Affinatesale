@@ -1,8 +1,13 @@
 import { Globe, Star } from "lucide-react";
+import { useState } from "react";
 import React from "react";
 import { Footer } from "../components/footer";
+import { ContentClassroom } from "../components/ContentClassroom";
+import { ReviewClassroom } from "../components/ReviewClassroom";
+import { AboutClassroom } from "../components/AboutClassroom";
 
-export const ClasscroomCourse = () => {
+export const ClasscroomAbout = () => {
+  const [activeTab, setActiveTab] = useState("about");
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Header */}
@@ -73,31 +78,41 @@ export const ClasscroomCourse = () => {
 
       {/* Navigation Tabs */}
       <div className="flex border-b bg-white">
-        <button className="px-6 py-3 font-medium border-b-2 border-black text-black">
+        <button
+          onClick={() => setActiveTab("about")}
+          className={`px-6 py-3 font-medium ${
+            activeTab === "about"
+              ? "border-b-4 border-black font-extrabold"
+              : "border-0"
+          }  text-black`}
+        >
           About
         </button>
-        <button className="px-6 py-3 font-medium text-gray-600 hover:text-gray-800 transition-colors">
+        <button
+          onClick={() => setActiveTab("content")}
+          className={`px-6 py-3 font-medium ${
+            activeTab === "content"
+              ? "border-b-4 border-black font-extrabold"
+              : "border-0"
+          }  text-black`}
+        >
           Course Content
         </button>
-        <button className="px-6 py-3 font-medium text-gray-600 hover:text-gray-800 transition-colors">
+        <button
+          onClick={() => setActiveTab("review")}
+          className={`px-6 py-3 font-medium ${
+            activeTab === "review"
+              ? "border-b-4 border-black font-extrabold"
+              : "border-0"
+          }  text-black`}
+        >
           Review
         </button>
       </div>
-
-      {/* About Content */}
-      <div className="p-6 bg-white">
-        <h3 className="text-xl font-semibold mb-4 text-gray-900">
-          Course Description:
-        </h3>
-        <p className="text-gray-700 leading-relaxed text-base">
-          In this comprehensive course, you will dive deep into the world of
-          WhatsApp TV, learning everything from the basics to advanced
-          strategies. WhatsApp TV has emerged as a powerful platform for content
-          creators, entrepreneurs, and influencers to engage with their
-          audience, build a community, and even monetize their content. Whether
-          you're looking to start your own WhatsApp TV channel or enhance your
-          existing one.
-        </p>
+      <div>
+        {activeTab === "about" && <AboutClassroom />}
+        {activeTab === "content" && <ContentClassroom />}
+        {activeTab === "review" && <ReviewClassroom />}
       </div>
       <Footer />
     </div>
@@ -106,172 +121,205 @@ export const ClasscroomCourse = () => {
 
 // classroo content component
 
-export const ClassroomContent = () => {
-  return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 bg-white border-b">
-        <h1 className="text-xl font-semibold text-gray-900">Learn and Earn</h1>
-        <div className="w-10 h-10 rounded-full bg-orange-400 overflow-hidden">
-          <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white font-bold">
-            <img
-              src="/clinton.jpg"
-              className="h-24 w-24 rounded-full "
-              alt="clinton"
-            />
-          </div>
-        </div>
-      </div>
+// export const ClassroomContent = () => {
+//   return (
+//     <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+//       {/* Header */}
+//       <div className="flex items-center justify-between p-4 bg-white border-b">
+//         <h1 className="text-xl font-semibold text-gray-900">Learn and Earn</h1>
+//         <div className="w-10 h-10 rounded-full bg-orange-400 overflow-hidden">
+//           <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white font-bold">
+//             <img
+//               src="/clinton.jpg"
+//               className="h-24 w-24 rounded-full "
+//               alt="clinton"
+//             />
+//           </div>
+//         </div>
+//       </div>
 
-      {/* Course Hero Section */}
-      <div className="bg-[#170C32] p-6 text-white">
-        <div className="flex items-center gap-6">
-          {/* Course Image */}
-          <div className="flex-shrink-0">
-            <div className="w-52 h-52 bg-white rounded-lg p-3 relative">
-              {/* TV Image representation */}
-              <div className="w-full h-full bg-gradient-to-br from-teal-400 to-green-500 rounded-md relative overflow-hidden">
-                <img
-                  src="/whasapp_logo.png"
-                  alt="whatsapp logo "
-                  className="w-full h-full"
-                />
-                {/* Lightning effect */}
-              </div>
-              {/* Course title overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-xs p-2 text-center rounded-b-md">
-                <div className="font-semibold leading-tight">
-                  How to Start a Profitable WhatsApp TV Business
-                </div>
-              </div>
-            </div>
-          </div>
+//       {/* Course Hero Section */}
+//       <div className="bg-[#170C32] p-6 text-white">
+//         <div className="flex items-center gap-6">
+//           {/* Course Image */}
+//           <div className="flex-shrink-0">
+//             <div className="w-52 h-52 bg-white rounded-lg p-3 relative">
+//               {/* TV Image representation */}
+//               <div className="w-full h-full bg-gradient-to-br from-teal-400 to-green-500 rounded-md relative overflow-hidden">
+//                 <img
+//                   src="/whasapp_logo.png"
+//                   alt="whatsapp logo "
+//                   className="w-full h-full"
+//                 />
+//                 {/* Lightning effect */}
+//               </div>
+//               {/* Course title overlay */}
+//               <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-xs p-2 text-center rounded-b-md">
+//                 <div className="font-semibold leading-tight">
+//                   How to Start a Profitable WhatsApp TV Business
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
 
-          {/* Course Details */}
-          <div className="flex-1">
-            <h2 className="text-2xl font-bold mb-2 leading-tight">
-              How to Start a Profitable WhatsApp TV Business
-            </h2>
-            <p className="text-purple-200 mb-4">Social Media</p>
+//           {/* Course Details */}
+//           <div className="flex-1">
+//             <h2 className="text-2xl font-bold mb-2 leading-tight">
+//               How to Start a Profitable WhatsApp TV Business
+//             </h2>
+//             <p className="text-purple-200 mb-4">Social Media</p>
 
-            <div className="flex items-center gap-2 mb-3">
-              <span className="bg-yellow-400 gap-2 items-center flex text-white px-2 py-1 rounded text-sm font-bold">
-                <Star size={14} />
-                4.7
-              </span>
-            </div>
+//             <div className="flex items-center gap-2 mb-3">
+//               <span className="bg-yellow-400 gap-2 items-center flex text-white px-2 py-1 rounded text-sm font-bold">
+//                 <Star size={14} />
+//                 4.7
+//               </span>
+//             </div>
 
-            <p className="text-sm text-purple-200 mb-3">1220 students</p>
+//             <p className="text-sm text-purple-200 mb-3">1220 students</p>
 
-            <div className="flex items-center gap-4 text-sm text-purple-200 mb-4">
-              <div className="flex items-center gap-1">
-                <span className="w-4 h-4 flex items-center justify-center">
-                  <Globe />
-                </span>
-                <span>English</span>
-              </div>
-              <span>Intermediate</span>
-            </div>
+//             <div className="flex items-center gap-4 text-sm text-purple-200 mb-4">
+//               <div className="flex items-center gap-1">
+//                 <span className="w-4 h-4 flex items-center justify-center">
+//                   <Globe />
+//                 </span>
+//                 <span>English</span>
+//               </div>
+//               <span>Intermediate</span>
+//             </div>
 
-            <p className="text-xs text-purple-300 mb-4">
-              Last Updated 10/02/2025
-            </p>
+//             <p className="text-xs text-purple-300 mb-4">
+//               Last Updated 10/02/2025
+//             </p>
 
-            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition-colors duration-200">
-              Continue
-            </button>
-          </div>
-        </div>
-      </div>
+//             <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition-colors duration-200">
+//               Continue
+//             </button>
+//           </div>
+//         </div>
+//       </div>
 
-      {/* Navigation Tabs */}
-      <div className="flex border-b bg-white">
-        <button className="px-6 py-3 font-medium text-gray-600 hover:text-gray-800 transition-colors">
-          About
-        </button>
-        <button className="px-6 py-3 font-medium border-b-2 border-black text-black">
-          Course Content
-        </button>
-        <button className="px-6 py-3 font-medium text-gray-600 hover:text-gray-800 transition-colors">
-          Review
-        </button>
-      </div>
+//       {/* Navigation Tabs */}
+//       <div className="flex border-b bg-white">
+//         <button className="px-6 py-3 font-medium text-gray-600 hover:text-gray-800 transition-colors">
+//           About
+//         </button>
+//         <button className="px-6 py-3 font-medium border-b-2 border-black text-black">
+//           Course Content
+//         </button>
+//         <button className="px-6 py-3 font-medium text-gray-600 hover:text-gray-800 transition-colors">
+//           Review
+//         </button>
+//       </div>
 
-      {/* Course Content */}
-      <div className="p-6 bg-white">
-        <h3 className="text-xl font-semibold mb-6 text-gray-900">
-          Course Content:
-        </h3>
-        <ol className="space-y-3 text-gray-700">
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              1.
-            </span>
-            <span>Introduction to WhatsApp TV</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              2.
-            </span>
-            <span>Channel Identity and Branding</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              3.
-            </span>
-            <span>Content Creation Strategies</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              4.
-            </span>
-            <span>Audience Growth Tactics</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              5.
-            </span>
-            <span>Monetization Techniques</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              6.
-            </span>
-            <span>Advanced Optimization Tips</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              7.
-            </span>
-            <span>Hidden Features and Hacks</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              8.
-            </span>
-            <span>Risk Management and Troubleshooting</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              9.
-            </span>
-            <span>Case Studies and Success Stories</span>
-          </li>
-          <li className="flex items-start">
-            <span className="font-medium text-gray-900 mr-3 flex-shrink-0">
-              10.
-            </span>
-            <span>Future Trends and Adaptation</span>
-          </li>
-        </ol>
-      </div>
-      <Footer />
-    </div>
-  );
-};
+//       {/* Course Content */}
+
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// classroom Review component
+// export const ClassroomReview = () => {
+//   return (
+//     <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+//       {/* Header */}
+//       <div className="flex items-center justify-between p-4 bg-white border-b">
+//         <h1 className="text-xl font-semibold text-gray-900">Learn and Earn</h1>
+//         <div className="w-10 h-10 rounded-full bg-orange-400 overflow-hidden">
+//           <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white font-bold">
+//             <img
+//               src="/clinton.jpg"
+//               className="h-24 w-24 rounded-full "
+//               alt="clinton"
+//             />
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Course Hero Section */}
+//       <div className="bg-[#170C32] p-6 text-white">
+//         <div className="flex items-center gap-6">
+//           {/* Course Image */}
+//           <div className="flex-shrink-0">
+//             <div className="w-52 h-52 bg-white rounded-lg p-3 relative">
+//               {/* TV Image representation */}
+//               <div className="w-full h-full bg-gradient-to-br from-teal-400 to-green-500 rounded-md relative overflow-hidden">
+//                 <img
+//                   src="/whasapp_logo.png"
+//                   alt="whatsapp logo "
+//                   className="w-full h-full"
+//                 />
+//                 {/* Lightning effect */}
+//               </div>
+//               {/* Course title overlay */}
+//               <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-xs p-2 text-center rounded-b-md">
+//                 <div className="font-semibold leading-tight">
+//                   How to Start a Profitable WhatsApp TV Business
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Course Details */}
+//           <div className="flex-1">
+//             <h2 className="text-2xl font-bold mb-2 leading-tight">
+//               How to Start a Profitable WhatsApp TV Business
+//             </h2>
+//             <p className="text-purple-200 mb-4">Social Media</p>
+
+//             <div className="flex items-center gap-2 mb-3">
+//               <span className="bg-yellow-400 gap-2 items-center flex text-white px-2 py-1 rounded text-sm font-bold">
+//                 <Star size={14} />
+//                 4.7
+//               </span>
+//             </div>
+
+//             <p className="text-sm text-purple-200 mb-3">1220 students</p>
+
+//             <div className="flex items-center gap-4 text-sm text-purple-200 mb-4">
+//               <div className="flex items-center gap-1">
+//                 <span className="w-4 h-4 flex items-center justify-center">
+//                   <Globe />
+//                 </span>
+//                 <span>English</span>
+//               </div>
+//               <span>Intermediate</span>
+//             </div>
+
+//             <p className="text-xs text-purple-300 mb-4">
+//               Last Updated 10/02/2025
+//             </p>
+
+//             <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition-colors duration-200">
+//               Continue
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Navigation Tabs */}
+//       <div className="flex border-b bg-white">
+//         <button className="px-6 py-3 font-medium text-gray-600 hover:text-gray-800 transition-colors">
+//           About
+//         </button>
+//         <button className="px-6 py-3 font-medium text-black">
+//           Course Content
+//         </button>
+//         <button className="px-6 py-3  border-b-4  border-black font-medium text-gray-600 hover:text-gray-800 transition-colors">
+//           Review
+//         </button>
+//       </div>
+
+//       {/* Review grid above Content */}
+
+//       <Footer />
+//     </div>
+//   );
+// };
 
 // whasapp video player component
-export const WhatsAppVideo = () => {
+export const ClasscroomVideo = () => {
   const [currentVideo, setCurrentVideo] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(false);
 
@@ -446,323 +494,6 @@ export const WhatsAppVideo = () => {
               </span>
             </div>
           ))}
-        </div>
-      </div>
-      <Footer />
-    </div>
-  );
-};
-
-// classroom Review component
-
-export const ClassroomReview = () => {
-  return (
-    <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 bg-white border-b">
-        <h1 className="text-xl font-semibold text-gray-900">Learn and Earn</h1>
-        <div className="w-10 h-10 rounded-full bg-orange-400 overflow-hidden">
-          <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white font-bold">
-            <img
-              src="/clinton.jpg"
-              className="h-24 w-24 rounded-full "
-              alt="clinton"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Course Hero Section */}
-      <div className="bg-[#170C32] p-6 text-white">
-        <div className="flex items-center gap-6">
-          {/* Course Image */}
-          <div className="flex-shrink-0">
-            <div className="w-52 h-52 bg-white rounded-lg p-3 relative">
-              {/* TV Image representation */}
-              <div className="w-full h-full bg-gradient-to-br from-teal-400 to-green-500 rounded-md relative overflow-hidden">
-                <img
-                  src="/whasapp_logo.png"
-                  alt="whatsapp logo "
-                  className="w-full h-full"
-                />
-                {/* Lightning effect */}
-              </div>
-              {/* Course title overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-xs p-2 text-center rounded-b-md">
-                <div className="font-semibold leading-tight">
-                  How to Start a Profitable WhatsApp TV Business
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Course Details */}
-          <div className="flex-1">
-            <h2 className="text-2xl font-bold mb-2 leading-tight">
-              How to Start a Profitable WhatsApp TV Business
-            </h2>
-            <p className="text-purple-200 mb-4">Social Media</p>
-
-            <div className="flex items-center gap-2 mb-3">
-              <span className="bg-yellow-400 gap-2 items-center flex text-white px-2 py-1 rounded text-sm font-bold">
-                <Star size={14} />
-                4.7
-              </span>
-            </div>
-
-            <p className="text-sm text-purple-200 mb-3">1220 students</p>
-
-            <div className="flex items-center gap-4 text-sm text-purple-200 mb-4">
-              <div className="flex items-center gap-1">
-                <span className="w-4 h-4 flex items-center justify-center">
-                  <Globe />
-                </span>
-                <span>English</span>
-              </div>
-              <span>Intermediate</span>
-            </div>
-
-            <p className="text-xs text-purple-300 mb-4">
-              Last Updated 10/02/2025
-            </p>
-
-            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition-colors duration-200">
-              Continue
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Tabs */}
-      <div className="flex border-b bg-white">
-        <button className="px-6 py-3 font-medium text-gray-600 hover:text-gray-800 transition-colors">
-          About
-        </button>
-        <button className="px-6 py-3 font-medium text-black">
-          Course Content
-        </button>
-        <button className="px-6 py-3  border-b-4  border-black font-medium text-gray-600 hover:text-gray-800 transition-colors">
-          Review
-        </button>
-      </div>
-
-      {/* Review grid above Content */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-3 bg-white py-10">
-        <div className=" rounded-md shadow-md p-3 md:p-5 ">
-          <div className="flex justify-between my-2 items-center">
-            <img
-              src="/clinton.jpg"
-              alt="clinton-photo"
-              className="w-10 h-10 rounded-full"
-            />
-            <h3 className="font-bold text-black">Clinton</h3>
-          </div>
-          <div>
-            <p className="text-[#7E7EAA] text-[10px] leading-4">
-              Esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum. Duis aute irure dolor in
-              reprehenderit in voluptate velit{" "}
-            </p>
-            <span className="flex gap-2 mt-2">
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-gray-400 text-gray-400" />
-              </span>
-            </span>
-          </div>
-        </div>
-
-         <div className=" rounded-md shadow-md p-3 md:p-5 ">
-          <div className="flex justify-between my-2 items-center">
-            <img
-              src="/clinton.jpg"
-              alt="clinton-photo"
-              className="w-10 h-10 rounded-full"
-            />
-            <h3 className="font-bold text-black">Clinton</h3>
-          </div>
-          <div>
-            <p className="text-[#7E7EAA] text-[10px] leading-4">
-              Esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum. Duis aute irure dolor in
-              reprehenderit in voluptate velit{" "}
-            </p>
-            <span className="flex gap-2 mt-2">
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-gray-400 text-gray-400" />
-              </span>
-            </span>
-          </div>
-        </div>
-
-
-         <div className=" rounded-md shadow-md p-3 md:p-5 ">
-          <div className="flex justify-between my-2 items-center">
-            <img
-              src="/clinton.jpg"
-              alt="clinton-photo"
-              className="w-10 h-10 rounded-full"
-            />
-            <h3 className="font-bold text-black">Clinton</h3>
-          </div>
-          <div>
-            <p className="text-[#7E7EAA] text-[10px] leading-4">
-              Esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum. Duis aute irure dolor in
-              reprehenderit in voluptate velit{" "}
-            </p>
-            <span className="flex gap-2 mt-2">
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-gray-400 text-gray-400" />
-              </span>
-            </span>
-          </div>
-        </div>
-
-         <div className=" rounded-md shadow-md p-3 md:p-5 ">
-          <div className="flex justify-between my-2 items-center">
-            <img
-              src="/clinton.jpg"
-              alt="clinton-photo"
-              className="w-10 h-10 rounded-full"
-            />
-            <h3 className="font-bold text-black">Clinton</h3>
-          </div>
-          <div>
-            <p className="text-[#7E7EAA] text-[10px] leading-4">
-              Esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum. Duis aute irure dolor in
-              reprehenderit in voluptate velit{" "}
-            </p>
-            <span className="flex gap-2 mt-2">
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-gray-400 text-gray-400" />
-              </span>
-            </span>
-          </div>
-        </div>
-
-         <div className=" rounded-md shadow-md p-3 md:p-5 ">
-          <div className="flex justify-between my-2 items-center">
-            <img
-              src="/clinton.jpg"
-              alt="clinton-photo"
-              className="w-10 h-10 rounded-full"
-            />
-            <h3 className="font-bold text-black">Clinton</h3>
-          </div>
-          <div>
-            <p className="text-[#7E7EAA] text-[10px] leading-4">
-              Esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum. Duis aute irure dolor in
-              reprehenderit in voluptate velit{" "}
-            </p>
-            <span className="flex gap-2 mt-2">
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-gray-400 text-gray-400" />
-              </span>
-            </span>
-          </div>
-        </div>
-
-         <div className=" rounded-md shadow-md p-3 md:p-5 ">
-          <div className="flex justify-between my-2 items-center">
-            <img
-              src="/clinton.jpg"
-              alt="clinton-photo"
-              className="w-10 h-10 rounded-full"
-            />
-            <h3 className="font-bold text-black">Clinton</h3>
-          </div>
-          <div>
-            <p className="text-[#7E7EAA] text-[10px] leading-4">
-              Esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum. Duis aute irure dolor in
-              reprehenderit in voluptate velit{" "}
-            </p>
-            <span className="flex gap-2 mt-2">
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-yellow-400 text-yellow-400" />
-              </span>
-              <span>
-                <Star size={12} className="fill-gray-400 text-gray-400" />
-              </span>
-            </span>
-          </div>
         </div>
       </div>
       <Footer />

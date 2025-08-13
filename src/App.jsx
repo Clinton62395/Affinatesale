@@ -20,6 +20,7 @@ import { Settings } from "./DashbordComponent/settings.jsx";
 import { Logout } from "./DashbordComponent/logout.jsx";
 import { Bonus } from "./DashbordComponent/BonusPage.jsx";
 import DashboardRoute from "./Layout/DashbordLayout/DashbordLayout.jsx";
+import { ClasscroomAbout, ClasscroomVideo, } from "./DashbordComponent/Classcroom.jsx";
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
           <Route path="top-earner" element={<TopEarners />} />
           <Route path="settings" element={<Settings />} />
           <Route path="logout" element={<Logout />} />
+          <Route path="classroom/info" element={<ClasscroomAbout />} />
+          <Route path="classroom/video" element={<ClasscroomVideo />} />
         </Route>
 
         {/* <Route path="classroom-course" element={<ClasscroomCourse />} />

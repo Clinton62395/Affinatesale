@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   LayoutDashboard,
   GraduationCap,
@@ -10,6 +10,7 @@ import {
   Settings,
   LogOut,
   X,
+  Menu,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -33,20 +34,21 @@ export const DashboardNav = ({ isOpen, toggleSidebar }) => {
     <div
       className={`${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      } fixed inset-y-0 left-0 z-50 w-64 bg-[#170C32] transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0`}
+      } fixed inset-y-0 left-0 z-40 w-64 bg-[#170C32] transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative`}
     >
-      <div className="flex items-center justify-between md:justify-end h-16 pe-3 bg-white">
-        <h2 className="text-white font-semibold text-sm flex items-center">
-          <img src="/logo.png" alt="logo" className="h-10 ms-2" />
-        </h2>
+      <div className="flex justify-between items-center mt-2">
+        <img
+          src="logo.png"
+          alt="logo"
+          className="h-10 mx-3 invert brightness-0"
+        />
         <button
           onClick={toggleSidebar}
-          className="lg:hidden text-[#170C32] hover:text-[#f9f8fa] hover:bg-black h-8 w-8 rounded-full flex justify-center items-center transition-all duration-300"
+          className="lg:hidden text-gray-300 hover:text-black transition-all duration-300 hover:bg-white flex justify-center items-center w-7 h-7 rounded-full transform  hover:rotate-[90deg]"
         >
-          <X size={20} />
+          <X size={24} />
         </button>
       </div>
-
       <nav className="mt-6 px-3">
         <ul className="space-y-1">
           {menuItems.map((item, index) => {

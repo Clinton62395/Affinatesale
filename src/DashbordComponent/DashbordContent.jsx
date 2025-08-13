@@ -1,22 +1,20 @@
 import { useState } from "react";
 import { Footer } from "../components/footer";
 import { Menu, X } from "lucide-react";
+import { Link, Links } from "react-router-dom";
+
+
+
 
 export const Classroom = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
   return (
     <>
       <div className="relative flex min-h-screen px-2 ">
-      
         <div className=" mx-2 md:mx-10 h-screen flex-1 flex flex-col py-3 bg-white/90">
-          <button onClick={toggleSidebar} className="bg-white  ">
+          {/* <button onClick={toggleSidebar} className="bg-white  ">
             {" "}
-            {isOpen?   <X/>  : <Menu size={24} className="text-black" />  }
-            
-          </button>
+            {isOpen ? <X /> : <Menu size={24} className="text-black" />}
+          </button> */}
           <div className="flex justify-between items-center px-4 ">
             <div>
               <h5>Learn and Earn</h5>
@@ -63,13 +61,15 @@ export const Classroom = () => {
           <div className="container mx-auto max-w-6xl px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 md:my-10 gap-2 md:gap-5">
               <div className="border min-w-0">
-                <div className="flex justify-center">
-                  <img
-                    src="/tree.png"
-                    alt="image"
-                    className="object-cover h-full md:h-32 w-full"
-                  />
-                </div>
+                <Link to="/dashboard/classroom/info">
+                  <div className="flex justify-center">
+                    <img
+                      src="/tree.png"
+                      alt="image"
+                      className="object-cover h-full md:h-32 w-full md:max-w-full"
+                    />
+                  </div>
+                </Link>
                 <div className=" font-semibold my-2 flex justify-between px-2">
                   <p>1220 students</p>
                   <p> 4 Months ago</p>
@@ -84,13 +84,15 @@ export const Classroom = () => {
               </div>
 
               <div className="border min-w-0">
-                <div className="flex justify-center">
-                  <img
-                    src="/challeng.png"
-                    alt="image"
-                    className="object-cover h-full md:h-32 w-full"
-                  />
-                </div>
+                <Link to="/dashboard/classroom/content">
+                  <div className="flex justify-center">
+                    <img
+                      src="/challeng.png"
+                      alt="image"
+                      className="object-cover h-full md:h-32 w-full"
+                    />
+                  </div>
+                </Link>
                 <div className=" font-semibold my-2 flex justify-between px-2">
                   <p>1220 students</p>
                   <p> 4 Months ago</p>
@@ -110,13 +112,15 @@ export const Classroom = () => {
               </div>
 
               <div className="border min-w-0">
-                <div className="flex justify-center">
-                  <img
-                    src="/whasapp_logo.png"
-                    alt="image"
-                    className="object-cover h-full md:h-32 w-full"
-                  />
-                </div>
+                <Link to="/dashboard/classroom/review">
+                  <div className="flex justify-center">
+                    <img
+                      src="/whasapp_logo.png"
+                      alt="image"
+                      className="object-cover h-full md:h-32 w-full"
+                    />
+                  </div>
+                </Link>
                 <div className=" font-semibold my-2 flex justify-between px-2">
                   <p>1220 students</p>
                   <p> 4 Months ago</p>
@@ -133,13 +137,15 @@ export const Classroom = () => {
               </div>
 
               <div className="border min-w-0">
-                <div className="flex justify-center">
-                  <img
-                    src="/instagram.png"
-                    alt="image"
-                    className="object-cover h-full md:h-32 w-full"
-                  />
-                </div>
+                <Link to="/dashboard/classroom/video">
+                  <div className="flex justify-center">
+                    <img
+                      src="/instagram.png"
+                      alt="image"
+                      className="object-cover h-full md:h-32 w-full"
+                    />
+                  </div>
+                </Link>
                 <div className=" font-semibold my-2 flex justify-between px-2">
                   <p>1220 students</p>
                   <p> 4 Months ago</p>
