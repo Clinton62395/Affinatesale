@@ -9,12 +9,9 @@ import { Link, Links } from "react-router-dom";
 export const Classroom = () => {
   return (
     <>
-      <div className="relative flex min-h-screen px-2 ">
-        <div className=" mx-2 md:mx-10 h-screen flex-1 flex flex-col py-3 bg-white/90">
-          {/* <button onClick={toggleSidebar} className="bg-white  ">
-            {" "}
-            {isOpen ? <X /> : <Menu size={24} className="text-black" />}
-          </button> */}
+      <div className=" px-2 ">
+        <div className=" py-3 bg-white/90">
+        
           <div className="flex justify-between items-center px-4 ">
             <div>
               <h5>Learn and Earn</h5>
@@ -343,7 +340,7 @@ export const Classroom = () => {
           </div>
 
           {/* footer */}
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     </>

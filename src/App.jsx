@@ -11,7 +11,7 @@ import Payment from "./components/payment.jsx";
 import ForgotPassword from "./components/ForgotPassword.jsx";
 import { Classroom } from "./DashbordComponent/DashbordContent.jsx";
 import Dashboard from "./pages/Dashbord.jsx";
-import { Account } from "./DashbordComponent/account.jsx";
+import { AcountSetting } from "./DashbordComponent/account.jsx";
 import { LiveSession } from "./DashbordComponent/liveSession.jsx";
 import { Community } from "./DashbordComponent/community.jsx";
 import { HotNew } from "./DashbordComponent/hotNew.jsx";
@@ -20,7 +20,10 @@ import { Settings } from "./DashbordComponent/settings.jsx";
 import { Logout } from "./DashbordComponent/logout.jsx";
 import { Bonus } from "./DashbordComponent/BonusPage.jsx";
 import DashboardRoute from "./Layout/DashbordLayout/DashbordLayout.jsx";
-import { ClasscroomAbout, ClasscroomVideo, } from "./DashbordComponent/Classcroom.jsx";
+import {
+  ClasscroomAbout,
+  ClasscroomVideo,
+} from "./DashbordComponent/Classcroom.jsx";
 
 function App() {
   return (
@@ -45,7 +48,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="classroom" element={<Classroom />} />
           <Route path="bonus" element={<Bonus />} />
-          <Route path="account" element={<Account />} />
+          <Route path="account-setting" element={<AcountSetting />} />
           <Route path="live-session" element={<LiveSession />} />
           <Route path="community" element={<Community />} />
           <Route path="hot-new" element={<HotNew />} />

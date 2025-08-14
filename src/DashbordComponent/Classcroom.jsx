@@ -1,15 +1,16 @@
-import { Globe, Star } from "lucide-react";
+import { ArrowLeft, Globe, Settings, SmartphoneCharging, Star } from "lucide-react";
 import { useState } from "react";
 import React from "react";
 import { Footer } from "../components/footer";
 import { ContentClassroom } from "../components/ContentClassroom";
 import { ReviewClassroom } from "../components/ReviewClassroom";
 import { AboutClassroom } from "../components/AboutClassroom";
+import { Link, Links } from "react-router-dom";
 
 export const ClasscroomAbout = () => {
   const [activeTab, setActiveTab] = useState("about");
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between p-4 bg-white border-b">
         <h1 className="text-xl font-semibold text-gray-900">Learn and Earn</h1>
@@ -69,9 +70,12 @@ export const ClasscroomAbout = () => {
               Last Updated 10/02/2025
             </p>
 
-            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition-colors duration-200">
+            <Link
+              to="/dashboard/classroom/video"
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition-colors duration-200"
+            >
               Continue
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -114,7 +118,6 @@ export const ClasscroomAbout = () => {
         {activeTab === "content" && <ContentClassroom />}
         {activeTab === "review" && <ReviewClassroom />}
       </div>
-      <Footer />
     </div>
   );
 };
@@ -341,7 +344,13 @@ export const ClasscroomVideo = () => {
     <div className="max-w-2xl mx-auto bg-gray-100 min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between p-4 bg-white">
-        <h1 className="text-lg font-medium text-gray-900">Learn and Earn</h1>
+        <Link
+          to="/dashboard/classroom/info"
+          className="text-lg font-medium text-gray-900 flex gap-2 items-center"
+        >
+          <ArrowLeft size={24} className="text-black font-extrabold transform hover:-translate-x-2 transition-all duration-300 hover:text-blue-500 "/>
+          Learn and Earn
+        </Link>
         <div className="w-8 h-8 rounded-full bg-orange-400 overflow-hidden">
           <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white text-xs font-bold">
             <img
@@ -396,10 +405,10 @@ export const ClasscroomVideo = () => {
 
               {/* Lightning effects */}
               <div className="absolute top-8 left-12 text-yellow-300 text-sm opacity-80">
-                ⚡
+                <SmartphoneCharging />
               </div>
               <div className="absolute bottom-12 right-16 text-yellow-300 text-xs opacity-60">
-                ⚡
+                <SmartphoneCharging />
               </div>
             </div>
 
@@ -434,7 +443,7 @@ export const ClasscroomVideo = () => {
                   </button>
                   {/* Settings */}
                   <button className="w-6 h-6 flex items-center justify-center hover:bg-white/20 rounded">
-                    ⚙️
+                    <Settings />
                   </button>
                   {/* Fullscreen */}
                   <button className="w-6 h-6 flex items-center justify-center hover:bg-white/20 rounded">
@@ -496,7 +505,6 @@ export const ClasscroomVideo = () => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

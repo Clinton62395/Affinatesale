@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { DashboardNav } from "../../navbar/dashbordNavbar";
 import { Menu } from "lucide-react";
 import React from "react";
+import { Footer } from "../../components/footer";
 
 function DashboardRoute() {
   const [isOpen, setIsopen] = React.useState(false);
@@ -22,11 +23,14 @@ function DashboardRoute() {
             >
               <Menu size={20} />
             </button>
-            <img src="logo.png" alt="logo" className="h-14" />
+            <img src="/logo.png" alt="logo" className="h-14" />
           </header>
 
-          <main className="flex-1 p-4">
-            <Outlet /> {/* Contenu de la route enfant */}
+          <main className="flex-1  p-4">
+            <Outlet />
+            <footer className="mt-10 flex">
+              <Footer /> {/* Contenu de la route enfant */}
+            </footer>
           </main>
         </div>
       </div>

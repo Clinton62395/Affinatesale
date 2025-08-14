@@ -11,6 +11,7 @@ import {
   LogOut,
   X,
   Menu,
+  CircleArrowOutUpLeft,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -24,10 +25,11 @@ export const DashboardNav = ({ isOpen, toggleSidebar }) => {
     { name: "Bonus", icon: Gift, path: "/dashboard/bonus" },
     { name: "Hot News", icon: Newspaper, path: "/dashboard/hot-new" },
     { name: "Top Earners", icon: Star, path: "/dashboard/top-earner" },
-    { name: "Account", icon: User, path: "/dashboard/account" },
+    { name: "Account", icon: User, path: "/dashboard/account-setting" },
     { name: "Live Session", icon: Users, path: "/dashboard/live-session" },
     { name: "Community", icon: Users, path: "/dashboard/community" },
     { name: "Settings", icon: Settings, path: "/dashboard/settings" },
+    // { name: "Settings", icon: CircleArrowOutUpLeft, path: "/dashboard/logout" },
   ];
 
   return (
@@ -38,9 +40,9 @@ export const DashboardNav = ({ isOpen, toggleSidebar }) => {
     >
       <div className="flex justify-between items-center mt-2">
         <img
-          src="logo.png"
+          src="/logo.png"
           alt="logo"
-          className="h-10 mx-3 invert brightness-0"
+          className="h-10 mx-3 lg:hidden invert brightness-0"
         />
         <button
           onClick={toggleSidebar}
@@ -74,7 +76,7 @@ export const DashboardNav = ({ isOpen, toggleSidebar }) => {
 
           <li className="pt-3 border-t border-indigo-700 mt-4">
             <Link
-              to="/logout"
+              to="/dashboard/logout"
               className="flex items-center px-3 py-2 text-sm font-medium text-gray-300 rounded-lg hover:text-white hover:bg-indigo-800 transition-colors duration-200"
             >
               <LogOut className="mr-3 h-4 w-4" />
