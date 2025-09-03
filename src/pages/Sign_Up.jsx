@@ -1,6 +1,17 @@
 import { Eye, EyeOff } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+// firebase config
+import {
+  auth,
+  analytics,
+  provider,
+  signInWithPopup,
+  fProvider,
+} from "../config/firebase";
+import axios from "axios";
+import { BASE_URL } from "../utils/constant.js";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -13,6 +24,68 @@ function SignUp() {
     referralCode: "",
     country: "",
   });
+  const handleGoogleSign = async (even) => {
+    even.preventDefault();
+    try {
+      const result = await signInWithPopup(auth, provider);
+
+      const user = result.user;
+      if (user) {
+        const idToken = await user.getIdToken();
+
+        sendToken(idToken);
+      }
+    } catch (error) {
+      console.error("error when signing up user", error.message);
+    }
+  };
+
+  // facebook
+
+  const handleFacebookSign = async (even) => {
+    even.preventDefault();
+    try {
+      const result = await signInWithPopup(auth, fProvider);
+      const user = result.user;
+
+      const idToken = await user.getIdToken();
+
+      sendToken(idToken);
+
+      console.log(user);
+    } catch (error) {
+      console.error("error when signing up user", error.message);
+    }
+  };
+
+  const sendToken = async (idTokenFromLogin) => {
+    try {
+      const user = auth.currentUser;
+
+      if (!user) {
+        return console.log("not user yet");
+      }
+      const idToken = idTokenFromLogin || (await auth.currentUser.getIdToken());
+
+      const response = await axios.post(
+        `${BASE_URL}/auth/google`,
+        {},
+        {
+          headers: {
+            // prettier-ignore
+            "Authorization": `Bearer ${idToken}`,
+          },
+        }
+      );
+
+      console.log("data from backend", idToken);
+    } catch (error) {
+      console.error(
+        "error when sending data to backend ",
+        error.response?.data || error.message
+      );
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -25,6 +98,29 @@ function SignUp() {
     e.preventDefault();
     console.log("Form submitted:", formData);
   };
+
+  const [contrie, setCountrie] = useState([]);
+
+  useEffect(() => {
+    const getAllCounties = async () => {
+      const getCountri = await fetch(
+        "https://restcountries.com/v3.1/all?fields=name,cca2"
+      );
+      if (!getCountri.ok) {
+        throw new Error("error when loading countries");
+      }
+      const countries = await getCountri.json();
+      console.log("world countri", countries.length);
+      setCountrie(
+        [...countries].sort((a, b) => {
+          const nameA = a.name.common.toLowerCase();
+          const nameB = b.name.common.toLowerCase();
+          return nameA.localeCompare(nameB);
+        })
+      );
+    };
+    getAllCounties();
+  }, []);
 
   //   eyes for password;
   const [view, setView] = useState("password");
@@ -45,7 +141,9 @@ function SignUp() {
         <div className="relative z-10 w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl px-2 py-10 my-10">
           {/* En-tête */}
           <div className="text-center mb-8 space-y-2 flex justify-center items-center mx-auto flex-col">
-          <Link to="/"><img src="/logo.png" className="h-24" alt="logo"/></Link>
+            <Link to="/">
+              <img src="/logo.png" className="h-24" alt="logo" />
+            </Link>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Sign Up</h1>
           </div>
 
@@ -105,10 +203,12 @@ function SignUp() {
                   placeholder="Password"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 bg-white/90"
                 />
-                <span onClick={togglePassword} className="absolute right-5 top-3  cursor-pointer text-gray-500">
-                {view === "text" ? <Eye /> : <EyeOff />}
+                <span
+                  onClick={togglePassword}
+                  className="absolute right-5 top-3  cursor-pointer text-gray-500"
+                >
+                  {view === "text" ? <Eye /> : <EyeOff />}
                 </span>
-              
               </div>
               <div className="relative">
                 <input
@@ -148,16 +248,14 @@ function SignUp() {
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
               >
-                <option value="" selected hidden className="text-gray-400">
-                  country
+                <option selected hidden className="text-gray-400">
+                  Select a country
                 </option>
-                <option value="US">Nigeria</option>
-                <option value="CA">Guinea</option>
-                <option value="UK">United Kingdom</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
-                <option value="NG">Mali</option>
-                <option value="other">Other</option>
+                {contrie.map((country) => (
+                  <option value={country.cca2} key={country.cca2}>
+                    {country.name.common}
+                  </option>
+                ))}
               </select>
             </div>
             {/* link to go  sign up */}
@@ -166,6 +264,29 @@ function SignUp() {
                 {" "}
                 Sign Up
               </button>
+            </div>
+            <div className="space-y-2">
+              {/* <p></p> */}
+              <div className="relative text-center px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent font-semibol text-white/90 bg-[#08022be0] w-full hover:bg-[#08022b] transform translate-scale-[1.2] transition-all transition-300">
+                <button onClick={handleGoogleSign} type="button" className="">
+                  Sign with google
+                </button>
+                <img
+                  src="google-logo.png"
+                  alt="google logo"
+                  className="h-10 absolute left-3 top-1"
+                />
+              </div>
+              {/* <p></p> */}
+              <div className=" -h-3  w-full transform hover:translate-x-2 duration-500 transition-all">
+                <button onClick={handleFacebookSign} type="button" className="">
+                  <img
+                    src="facebooksign.png"
+                    alt="facebook logo"
+                    className="w-full "
+                  />
+                </button>
+              </div>
             </div>
 
             {/* Conditions d'utilisation */}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Camera, Save } from "lucide-react";
 import { useState } from "react";
-import { preview } from "vite";
+// import { preview } from "vite";
 
 export const AcountSetting = () => {
   const [isActive, setIsActive] = useState("Account");

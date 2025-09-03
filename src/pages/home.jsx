@@ -1,9 +1,70 @@
-import { BadgeCheck, ChevronDown, Youtube } from "lucide-react";
 import React from "react";
+import { BadgeCheck, ChevronDown, ChevronUp, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import NavbarComponent from "../navbar/LandingNav";
 import { Footer } from "../components/footer";
 function Home() {
+  const [openItems, setOpenItems] = React.useState({});
+
+  const faqData = [
+    {
+      id: 1,
+      question: "How soon can I start earning money?",
+      answer:
+        "You can start earning within the first week of implementing our strategies. Many students see their first commissions within 3-7 days of applying what they learn. However, consistent income typically develops over 2-4 weeks as you master the techniques.",
+    },
+    {
+      id: 2,
+      question: "Why is the price so affordable if the program offers so much?",
+      answer:
+        "We believe in making financial freedom accessible to everyone. Our affordable pricing allows us to help more people transform their lives. The value you receive far exceeds the investment - our students typically earn back their investment within the first month.",
+    },
+    {
+      id: 3,
+      question: "Is there any guarantee of success?",
+      answer:
+        "While we cannot guarantee individual results (as success depends on your effort and application), we provide all the tools, strategies, and support needed for success. Our track record shows that dedicated students who follow our system consistently achieve positive results.",
+    },
+    {
+      id: 4,
+      question: "What if I need help during the training?",
+      answer:
+        "You'll have access to our dedicated support team and community of successful affiliates. We provide live Q&A sessions, one-on-one mentoring opportunities, and a private Facebook group where you can get help anytime.",
+    },
+    {
+      id: 5,
+      question: "How do I know this is legitimate?",
+      answer:
+        "Our program has helped hundreds of students achieve success, as evidenced by our testimonials and case studies. We're transparent about our methods, provide real contact information, and offer ongoing support. You can also find reviews from our verified students.",
+    },
+    {
+      id: 6,
+      question: "Where will the training take place?",
+      answer:
+        "All training is conducted online through our secure learning platform. You can access the materials from anywhere in the world, at any time. We also conduct live webinars and virtual meetups for real-time interaction and support.",
+    },
+    {
+      id: 7,
+      question: "What makes this course different from others?",
+      answer:
+        "Our course focuses on proven, real-world strategies that are currently working. We provide step-by-step implementation guides, access to high-converting campaigns, and ongoing mentorship. Unlike other courses, we stay updated with the latest trends and algorithm changes.",
+    },
+    {
+      id: 8,
+      question:
+        "After the registration fee, will I need to pay any additional fees for account upgrades or before withdrawals?",
+      answer:
+        "No hidden fees! The registration fee covers everything you need to get started. There are no additional charges for account upgrades, withdrawals, or accessing advanced materials. Everything is included in your one-time investment.",
+    },
+  ];
+
+  const toggleItem = (id) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   return (
     <>
       <NavbarComponent />
@@ -60,108 +121,197 @@ function Home() {
 
         {/* grid container */}
 
-        <div className="container text-center mt-5 max-w-6xl max-auto ">
-          <h2 className="text-white font-bold text-4xl md:text-5xl mx-auto md:mx-24 ">
-            People are achieving big success every day with our secret guide on
-            AFFINETSALES{" "}
-          </h2>
-          <p className="my-3">Discovered it Yourself…</p>
-          <div className="grid grid-cols-1  md:grid-cols-4 gap-4 mx-auto md:mx-10 ">
-            <div className="col-span-1 rounded-md px-2 py-3 mx-auto text-center bg-[#ddd]">
-              <img
-                src="coachFavour.png"
-                alt="image"
-                className="md:h-52 w-full "
-              />
-              <h5 className="font-bold my-5">Coach Favour</h5>
-              <p className="text-sm font-semibold p-3 break-words">
-                I had the privilege of meeting Brains TV three (3) years ago,
-                and it was a turning point in my life. Through his guidance, I
-                acquired a range of valuable skills and discovered the world of
-                affiliate marketing. I also started earning a steady income
-                alongside him. His mentorship and expertise in affiliate
-                marketing have been instrumental.
-              </p>
-            </div>
-            <div className="col-span-1 rounded-md px-2 text-center bg-[#ddd]">
-              <img
-                src="coachJannifa.png"
-                alt="image"
-                className="h-52 mx-auto my-3"
-              />
+        <div className="container text-center mt-5 max-w-6xl mx-auto px-4">
+          {/* Enhanced header with gradient text and subtle animation */}
+          <div className="mb-12">
+            <h2 className="text-white font-bold text-4xl md:text-5xl mx-auto md:mx-24 mb-4 leading-tight">
+              People are achieving{" "}
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                big success
+              </span>{" "}
+              every day with our secret guide on{" "}
+              <span className="text-blue-400 font-extrabold">AFFINETSALES</span>
+            </h2>
+            <p className="text-gray-300 text-lg font-medium">
+              Discover it Yourself…
+            </p>
 
-              <h5 className="font-bold">Ogbeide Oluwatobi Masebinu</h5>
-              <p className=" text-sm font-semibold p-3 break-words">
-                "I Made My First Million at 22! My passion for making money has
-                driven me to become a jack of many trades. I've explored
-                countless ways to earn both online and offline, but Affiliate
-                Marketing truly stood out. The most rewarding part isn’t just
-                the money I’ve made—it's the fact that I've been able to teach
-                hundreds of students the same method, empowering them to achieve
-                their financial goals too.
-              </p>
-            </div>
-            <div className="col-span-1 rounded-md px-2 py-3 text-center bg-[#ddd]">
-              <img
-                src="mocebinu.png"
-                alt="image"
-                className="md:h-52 w-full  mb-3"
-              />
-
-              <h5 className="font-bold">Coach JENNIFER</h5>
-              <p className="text-sm font-semibold p-3 break-words">
-                I've always wanted to make money online but was scared of
-                getting scammed until I met Brains TV. At first, I had my
-                doubts, but he proved them wrong. I made my first 30k within a
-                few days of working with him, and I've never regretted working
-                with him since then.
-              </p>
-            </div>
-            <div className="col-span-1 rounded-md px-2 py-3 text-center bg-[#ddd]">
-              <img
-                src="clinton.jpg"
-                alt="image"
-                className="md:h-52 w-full rounded-xl mb-2"
-              />
-
-              <h5 className="font-bold">Coach Bill Clinton</h5>
-              <p className="text-sm font-semibold p-3 break-words">
-                Passionate about digital technology and financial independence,
-                I am dedicated to IT, particularly web development, graphic
-                design, cybersecurity, and video editing. I am also fascinated
-                by the world of cryptocurrencies and trading. My goal is to
-                acquire strong skills to create a modern training center that
-                will positively impact my community.
-              </p>
+            {/* Decorative element */}
+            <div className="flex justify-center mt-6">
+              <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
             </div>
           </div>
-        </div>
 
-        {/* contente above the grid */}
+          {/* Enhanced testimonials grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
+            {/* Coach Favour */}
+            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6">
+              <div className="relative mb-4">
+                <img
+                  src="coachFavour.png"
+                  alt="Coach Favour"
+                  className="h-48 w-full object-cover rounded-lg"
+                />
+                {/* Success badge */}
+                <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  ✓ SUCCESS
+                </div>
+              </div>
 
-        <div className="text-white max-w-4xl mx-auto my-5">
-          <h2 className="font-bold text-3xl md:text-[50px] leading-tight">
-            Why <span className="text-green-700">Affinetsales</span> is the
-            <br /> Right Choice for You
-          </h2>
-          <p className="text-white text-start md:text-center text-medium p-5 break-words">
-            In a world where the cost of living keeps rising, it can feel
-            impossible to stay ahead. But with Affinetsales, you can turn this
-            challenge into an opportunity. We’re here to help you not only keep
-            up but excel. At Affinetsales, we believe that financial
-            independence is within everyone's reach. Our platform is designed to
-            provide you with the skills and strategies needed to generate
-            significant income online. From learning digital skills to reaching
-            out to customers who are ready to pay well, and even mastering the
-            secrets of closing sales as an affiliate marketer—we cover it all.
-            Unlock Your Potential Join a Community of Success-Driven Individuals
-            Learn, Earn, and Grow with Affinetsales
-          </p>
+              <h5 className="font-bold text-xl text-gray-800 mb-3">
+                Coach Favour
+              </h5>
+              <div className="flex justify-center mb-3">
+                {/* Star rating */}
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-400 text-lg">
+                    ★
+                  </span>
+                ))}
+              </div>
 
-          <h2 className="my-4 text-white font-bold text-4xl leading-tight">
-            We've compiled a range of businesses <br /> you can start today with
-            <span className="text-green-700"> complete guidance</span>.
-          </h2>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                I had the privilege of meeting Brains TV three years ago, and it
+                was a{" "}
+                <span className="font-semibold text-blue-600">
+                  turning point
+                </span>{" "}
+                in my life. Through his guidance, I acquired valuable skills and
+                discovered affiliate marketing. His mentorship has been
+                instrumental in my success.
+              </p>
+
+              {/* Quote decoration */}
+              <div className="text-blue-400 text-4xl font-bold mt-4 opacity-20">
+                "
+              </div>
+            </div>
+
+            {/* Ogbeide Oluwatobi */}
+            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6">
+              <div className="relative mb-4">
+                <img
+                  src="coachJannifa.png"
+                  alt="Ogbeide Oluwatobi"
+                  className="h-48 w-full object-cover rounded-lg"
+                />
+                <div className="absolute -top-2 -right-2 bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  MILLIONAIRE
+                </div>
+              </div>
+
+              <h5 className="font-bold text-xl text-gray-800 mb-3">
+                Ogbeide Oluwatobi Masebinu
+              </h5>
+              <div className="flex justify-center mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-400 text-lg">
+                    ★
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-sm text-gray-600 leading-relaxed">
+                <span className="font-bold text-purple-600">
+                  "I Made My First Million at 22!"
+                </span>
+                My passion for making money led me to explore countless
+                opportunities, but Affiliate Marketing truly stood out. The most
+                rewarding part is teaching hundreds of students the same method.
+              </p>
+
+              <div className="text-purple-400 text-4xl font-bold mt-4 opacity-20">
+                "
+              </div>
+            </div>
+
+            {/* Coach Jennifer */}
+            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6">
+              <div className="relative mb-4">
+                <img
+                  src="mocebinu.png"
+                  alt="Coach Jennifer"
+                  className="h-48 w-full object-cover rounded-lg"
+                />
+                <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  30K EARNER
+                </div>
+              </div>
+
+              <h5 className="font-bold text-xl text-gray-800 mb-3">
+                Coach JENNIFER
+              </h5>
+              <div className="flex justify-center mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-400 text-lg">
+                    ★
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-sm text-gray-600 leading-relaxed">
+                I've always wanted to make money online but was scared of
+                getting scammed until I met Brains TV. I made my{" "}
+                <span className="font-semibold text-green-600">
+                  first 30k within a few days
+                </span>{" "}
+                of working with him, and I've never regretted it since.
+              </p>
+
+              <div className="text-green-400 text-4xl font-bold mt-4 opacity-20">
+                "
+              </div>
+            </div>
+
+            {/* Coach Bill Clinton */}
+            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6">
+              <div className="relative mb-4">
+                <img
+                  src="clinton.jpg"
+                  alt="Coach Bill Clinton"
+                  className="h-48 w-full object-cover rounded-lg"
+                />
+                <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  TECH EXPERT
+                </div>
+              </div>
+
+              <h5 className="font-bold text-xl text-gray-800 mb-3">
+                Coach Bill Clinton
+              </h5>
+              <div className="flex justify-center mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-400 text-lg">
+                    ★
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Passionate about digital technology and financial independence.
+                Dedicated to IT, web development, graphic design, and
+                cryptocurrencies. My goal is to create a{" "}
+                <span className="font-semibold text-blue-600">
+                  modern training center
+                </span>{" "}
+                that will positively impact my community.
+              </p>
+
+              <div className="text-blue-400 text-4xl font-bold mt-4 opacity-20">
+                "
+              </div>
+            </div>
+          </div>
+
+          {/* Call-to-action section */}
+          <div className="mt-16 text-center mb-5">
+            <p className="text-white text-xl mb-6">
+              Ready to join these success stories?
+            </p>
+            <button className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Get Started Today
+            </button>
+          </div>
         </div>
 
         {/* single container with image */}
@@ -391,48 +541,87 @@ function Home() {
 
         {/* footer container */}
 
-        <div className="text-start container max-w-2xl my-3 mx-auto">
-          <h3 className="text-center font-bold text-4xl text-green-600 py-3">
-            FREQUENTLY ASKED QUESTIONS{" "}
-          </h3>
-          <div className=" flex justify-between  text-white font-semibold  text-xl mb-5">
-            How soon can I start earning money?
-            <ChevronDown />
-          </div>
-          <div className="flex justify-between  text-white font-semibold  text-xl mb-5">
-            Why is the price so affordable if the program offers so much?{" "}
-            <ChevronDown />
-          </div>
-          <div className="flex justify-between  text-white font-semibold  text-xl mb-5">
-            Is there any guarantee of success? <ChevronDown />
-          </div>
-          <div className="flex justify-between  text-white font-semibold  text-xl mb-5">
-            What if I need help during the training? <ChevronDown />
-          </div>
-          <div className="flex justify-between  text-white font-semibold  text-xl mb-5">
-            How do I know this is legitimate? <ChevronDown />
-          </div>
-          <div className="flex justify-between  text-white font-semibold  text-xl mb-5">
-            Where will the training take place? <ChevronDown />
-          </div>
-          <div className="flex justify-between  text-white font-semibold  text-xl mb-5">
-            What makes this course different from others? <ChevronDown />
-          </div>
-          <div className="flex justify-between  text-white font-semibold  text-xl mb-5">
-            After the registration fee, will I need to pay any additional fees
-            for account upgrades or before withdrawals? <ChevronDown />
+        <div className="text-start container max-w-4xl my-12 mx-auto px-4">
+          {/* Enhanced header */}
+          <div className="text-center mb-12">
+            <h3 className="font-bold text-4xl md:text-5xl text-green-500 py-3 mb-4">
+              FREQUENTLY ASKED
+              <span className="block text-green-400">QUESTIONS</span>
+            </h3>
+            <div className="w-32 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto rounded-full"></div>
           </div>
 
-          <h3 className="text-center font-semibold text-2xl text-white py-3">
-            Are you ready to get started now?{" "}
-          </h3>
-          <div className="text-center my-3">
-            <Link
-              to="/SignUp"
-              className="text-white bg-green-500 px-5 py-2 mx-auto rounded-xl hover:bg-green-600 transition-300 transition-colors-300"
-            >
-              Sign Up
+          {/* FAQ Items */}
+          <div className="space-y-4">
+            {faqData.map((item) => (
+              <div
+                key={item.id}
+                className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden transition-all duration-300 hover:border-green-500/50"
+              >
+                {/* Question */}
+                <div
+                  className="flex justify-between items-center p-6 cursor-pointer group"
+                  onClick={() => toggleItem(item.id)}
+                >
+                  <h4 className="text-white font-semibold text-lg md:text-xl pr-4 group-hover:text-green-400 transition-colors duration-200">
+                    {item.question}
+                  </h4>
+                  <div className="flex-shrink-0 text-green-400 transition-transform duration-300">
+                    {openItems[item.id] ? (
+                      <ChevronUp className="w-6 h-6" />
+                    ) : (
+                      <ChevronDown className="w-6 h-6" />
+                    )}
+                  </div>
+                </div>
+
+                {/* Answer */}
+                <div
+                  className={`transition-all duration-300 ease-in-out ${
+                    openItems[item.id]
+                      ? "max-h-96 opacity-100"
+                      : "max-h-0 opacity-0"
+                  } overflow-hidden`}
+                >
+                  <div className="px-6 pb-6">
+                    <div className="w-full h-px bg-gradient-to-r from-transparent via-green-500 to-transparent mb-4"></div>
+                    <p className="text-gray-300 leading-relaxed text-base">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Enhanced Call-to-Action */}
+          <div className="text-center mt-16 p-8 bg-gradient-to-r from-green-600/20 to-blue-600/20 rounded-2xl border border-green-500/30">
+            <h3 className="font-bold text-3xl text-white mb-4">
+              Are you ready to get started now?
+            </h3>
+            <p className="text-gray-300 mb-6 text-lg">
+              Join hundreds of successful students and start your journey today!
+            </p>
+
+            <Link to="sign-up" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg">
+              Sign Up Now →
             </Link>
+
+            {/* Trust indicators */}
+            <div className="flex justify-center items-center mt-6 space-x-6 text-sm text-gray-400">
+              <div className="flex items-center">
+                <span className="text-green-400 mr-1">✓</span>
+                No Hidden Fees
+              </div>
+              <div className="flex items-center">
+                <span className="text-green-400 mr-1">✓</span>
+                Instant Access
+              </div>
+              <div className="flex items-center">
+                <span className="text-green-400 mr-1">✓</span>
+                24/7 Support
+              </div>
+            </div>
           </div>
         </div>
         {/* footer */}
