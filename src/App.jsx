@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import "./index.css";
+import { ToastContainer, toast } from "react-toastify";
 
 import Home from "./pages/home.jsx";
 import SignIn from "./pages/Sign_in";
@@ -28,14 +29,16 @@ import {
 function App() {
   return (
     <>
+      <ToastContainer />
       {/* <HashRouter> */}
       <Routes>
         {/* landing page route */}
         <Route path="/" element={<Home />} />
 
         {/* registration routes */}
-        <Route>
-          <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/auth">
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />
           <Route path="email" element={<CheckEmail />} />
           <Route path="forgot-password" element={<ForgotPassword />} />

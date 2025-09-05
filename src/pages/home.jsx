@@ -85,7 +85,7 @@ function Home() {
 
         <div className="my-4">
           <Link
-            to="/sign-up"
+            to="/auth/sign-up"
             className="text-white bg-green-600 px-3 py-2  rounded-md hover:bg-green-700"
           >
             Sign Up
@@ -603,7 +603,7 @@ function Home() {
               Join hundreds of successful students and start your journey today!
             </p>
 
-            <Link to="sign-up" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg">
+            <Link to="/auth/sign-up" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg">
               Sign Up Now →
             </Link>
 

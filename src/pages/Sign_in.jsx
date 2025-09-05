@@ -1,17 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { useState } from "react";
+import { toast } from "react-toastify";
+import { CircleLoader } from "react-spinners";
+
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+
+import axios from "axios";
+
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constant";
+
+const loginSchema = yup.object({
+  email: yup.string().email("invalid email").required("email is required"),
+  password: yup
+    .string()
+    .required("password is required")
+    .max(15, "password cannot be mort than 15 characteres")
+    .min(5, "password cannot be less than 5 characters"),
+});
 
 function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const navigate= useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
+
+  const onLogin = async (data) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/auth/login`, data);
+      console.log("user login ===>>>", data);
+      toast.success(res.data.message || "login succesfully");
+      navigate("/dashboard")
+    } catch (error) {
+      console.error("error occured when login", error.message);
+      if (error.response) {
+        toast.error(error.response.data.message || "email is required");
+      }
+      {
+        toast.error("network error, check your network");
+      }
+    }
   };
 
   return (
@@ -32,29 +72,35 @@ function SignIn() {
           </div>
 
           {/* Formulaire */}
-          <div className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit(onLogin)}>
             {/* Champ Email */}
             <div>
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email")}
                 placeholder="Email"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none text-gray-900 placeholder-gray-400"
-                required
               />
+              {errors.email && (
+                <p className="text-sm font-semibold text-red-500">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             {/* Champ Password */}
             <div className="relative">
               <input
+                {...register("password")}
                 type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none text-gray-900 placeholder-gray-400"
-                required
               />
+              {errors.password && (
+                <p className="text-sm font-semibold text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -84,11 +130,8 @@ function SignIn() {
             </div>
 
             {/* Bouton Login */}
-            <button
-              onClick={handleSubmit}
-              className="w-full bg-green-400 hover:bg-green-500 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 ease-in-out"
-            >
-              Login
+            <button className="w-full bg-green-400 hover:bg-green-500 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 ease-in-out">
+              {isSubmitting ? <CircleLoader size={20} color="#fff" /> : "login"}
             </button>
 
             {/* Termes et conditions */}
@@ -107,14 +150,14 @@ function SignIn() {
             {/* Lien Sign up */}
             <p className="text-sm text-gray-600 text-center">
               Already have account{" "}
-              <a
-                href="#"
+              <Link
+                to="/auth/sign-up"
                 className="text-green-400 hover:text-green-500 font-medium"
               >
-                Signup
-              </a>
+                Sign up
+              </Link>
             </p>
-          </div>
+          </form>
         </div>
       </div>
     </>
