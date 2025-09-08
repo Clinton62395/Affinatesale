@@ -94,8 +94,58 @@ function SignUp() {
 
   // handle google sign
 
-  const handleGoogleSign = async () => {};
-  const handleFacebookSign = async () => {};
+  const handleGoogleSign = async () => {
+    try {
+      const promise = await signInWithPopup(auth, provider);
+      const user = promise.user;
+      const idToken = await user.getIdToken();
+
+      const backendResponse = await sendTokenToBackend(idToken);
+      toast.success(backendResponse.message || "login successfully");
+    } catch (error) {
+      console.error("error when login", error.message);
+      if (error.code) {
+        toast.error(error.message || "error credential ");
+      } else {
+        toast.error(" network error  ");
+      }
+    }
+  };
+  const handleFacebookSign = async () => {
+    try {
+      const result = await signInWithPopup(auth, fProvider);
+      const user = result.user;
+      const idToken = await user.getIdToken();
+
+      const backendResponse = await sendTokenToBackend(idToken);
+      toast.success(backendResponse.message || "user login successfully");
+    } catch (error) {
+      console.error("error when login", error.message);
+      if (error.code) {
+        toast.error(error.message || "invalid credential");
+      } else {
+        toast.error("network error");
+      }
+    }
+  };
+
+  // send token to backend
+  const sendTokenToBackend = async (token) => {
+    try {
+      const req = await axios.post(
+        `${BASE_URL}/auth/google`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(req.data);
+    } catch (error) {
+      console.error("error when sending token", error.message);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-950 via-blue-950 to-teal-900">

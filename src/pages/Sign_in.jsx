@@ -27,7 +27,7 @@ function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -42,7 +42,7 @@ function SignIn() {
       const res = await axios.post(`${BASE_URL}/auth/login`, data);
       console.log("user login ===>>>", data);
       toast.success(res.data.message || "login succesfully");
-      navigate("/dashboard")
+      navigate("/dashboard");
     } catch (error) {
       console.error("error occured when login", error.message);
       if (error.response) {
@@ -121,12 +121,12 @@ function SignIn() {
                 />
                 Remember for 30 Days
               </label>
-              <a
-                href="#"
+              <Link
+                to="/auth/forgot-password"
                 className="text-green-400 hover:text-green-500 font-medium"
               >
                 Forgot Password?
-              </a>
+              </Link>
             </div>
 
             {/* Bouton Login */}
@@ -155,6 +155,12 @@ function SignIn() {
                 className="text-green-400 hover:text-green-500 font-medium"
               >
                 Sign up
+              </Link>
+              <Link
+                to="/auth/reset-password"
+                className="text-green-400 hover:text-green-500 font-medium"
+              >
+                reset-password
               </Link>
             </p>
           </form>

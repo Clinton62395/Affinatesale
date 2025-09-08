@@ -1,19 +1,39 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ArrowLeft, Key } from "lucide-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { ClipLoader } from "react-spinners";
+
+import { toast } from "react-toastify";
+import { BASE_URL } from "../utils/constant";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+  const [isLaoding, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = { email };
+    setIsLoading(true);
+
+    try {
+      const res = await axios.post(`${BASE_URL}/user/reset-password`, data);
+      toast.success(res.data.message || "email of password updating was sent ");
+    } catch (error) {
+      console.error(error.message);
+      if (error.response && error.response.data?.message) {
+        toast.error("error occured when password updating ");
+      } else if (error.request) {
+        toast.error("error occured dut to netword");
+      } else {
+        toast.error("unexpeted error occured");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+
     // Logique de soumission du formulaire
     console.log({ email });
-  };
-
-  const handleBackToLogin = () => {
-    // Logique de retour à la page de connexion
-    console.log("Back to login");
   };
 
   return (
@@ -22,7 +42,9 @@ export default function ForgotPassword() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-8">
-            <Link to="/"><img src="/logo.png" className="h-24" alt="logo"/></Link>
+            <Link to="/">
+              <img src="/logo.png" className="h-24" alt="logo" />
+            </Link>
           </div>
         </div>
 
@@ -64,18 +86,18 @@ export default function ForgotPassword() {
             onClick={handleSubmit}
             className="w-full bg-green-400 hover:bg-green-500 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 ease-in-out"
           >
-            Login
+            {isLaoding ? <ClipLoader size={20} /> : "Reset password"}
           </button>
 
           {/* Lien Back to log in */}
           <div className="text-center pt-4">
-            <button
-              onClick={handleBackToLogin}
+            <Link
+              to="/auth/sign-in"
               className="inline-flex items-center text-gray-600 hover:text-gray-800 text-sm font-medium transition duration-200"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to log in
-            </button>
+            </Link>
           </div>
         </div>
       </div>

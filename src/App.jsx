@@ -25,6 +25,7 @@ import {
   ClasscroomAbout,
   ClasscroomVideo,
 } from "./DashbordComponent/Classcroom.jsx";
+import NotFound from "./pages/notFound.jsx";
 
 function App() {
   return (
@@ -62,12 +63,8 @@ function App() {
           <Route path="classroom/video" element={<ClasscroomVideo />} />
         </Route>
 
-        {/* <Route path="classroom-course" element={<ClasscroomCourse />} />
-        <Route path="classroom-content" element={<ClassroomContent />} />
-        <Route path="classroom-video" element={<WhatsAppVideo />} />
-        <Route path="classroom-Review" element={<ClassroomReview />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* </HashRouter> */}
     </>
   );
 }
