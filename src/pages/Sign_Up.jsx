@@ -9,8 +9,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react";
 import { BASE_URL } from "../utils/constant";
+import api from "../utils/axios";
 
-// ✅ Définir le schema OUTSIDE du composant
+//  Définir le schema OUTSIDE du composant
 const schema = yup.object({
   firstName: yup.string().required("First name is required"),
   lastName: yup.string().required("Last name is required"),
@@ -33,7 +34,9 @@ const schema = yup.object({
 });
 
 function SignUp() {
-  // ✅ UN SEUL système de gestion de formulaire
+  //  UN SEUL système de gestion de formulaire
+
+  const [user, setUser] = useState(null);
   const {
     register,
     handleSubmit,
@@ -49,23 +52,34 @@ function SignUp() {
 
   // ✅ Fonction de soumission CORRECTE
   const onSubmit = async (data) => {
-    console.log("Form data:", data); // ✅ Données réelles du formulaire
+    console.log("Form fexthed envoyees depuis le backend:", data); // ✅ Données réelles du formulaire
 
     try {
-      const res = await axios.post(`${BASE_URL}/auth/register`, data);
-      toast.success("Registered successfully");
-      navigate("/dashboard");
+      const res = await api.post("/auth/register", data);
+      if (res.status === 201) {
+        toast.success(res.data.message || "Registered successfully");
 
-      // localstorage to access to token from data
-      const { access, refresh } = response.data.access_token;
-      localStorage.getItem("access_Token", access);
-      localStorage.getItem("refresh_Token", refresh);
+        const user = res.data.user || res.data.data;
+        console.log(
+          "this all information about data from backend =====>",
+          res.data
+        );
+
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+        }
+        setUser(user);
+
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error("Registration error:", error);
       if (error.response) {
         toast.error(error.response.data.message || "Registration failed");
-      } else {
+      } else if (error.request) {
         toast.error("Network error");
+      } else {
+        toast.error("unexpected error occured");
       }
     }
   };

@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { CircleLoader } from "react-spinners";
 
+import { UserContext } from "../utils/userContext";
 import {
   Menu,
   DollarSign,
@@ -10,14 +13,57 @@ import {
   Twitter,
   Youtube,
   ArrowLeftRight,
+  Currency,
 } from "lucide-react";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
+  const { user, isLoading, error } = useContext(UserContext);
+  console.log("=== DEBUG DASHBOARD ===");
+  console.log("user:", user);
+  console.log("user type:", typeof user);
+  console.log("isLoading:", isLoading);
+  console.log("error:", error);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen flex-col">
+        <CircleLoader size={50} color="#2563eb" />
+        <p className="mt-3 text-gray-600">User dashboard data fetching...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center mt-10">
+        <p className="text-red-600">
+          {" "}
+          Error: {typeof error === "string"
+            ? error
+            : "something went wrong "}{" "}
+        </p>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
+  if (!user || !user.firstName) {
+    return <p className="text-center mt-10">Aucun utilisateur trouvé.</p>;
+  }
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Contenu principal */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
+
         <header className="bg-white shadow-sm border-b">
           <div className="flex items-center justify-between px-6 py-4">
             <div className="flex items-center">
@@ -29,7 +75,7 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center space-x-4">
               <select className="text-sm border border-gray-300 rounded px-2 py-1">
-                <option>USD</option>
+                <option>{user.currency}</option>
               </select>
               <div className="w-8 h-8 bg-orange-400 rounded-full">
                 {" "}
@@ -49,22 +95,23 @@ export default function Dashboard() {
           <div className="bg-[#170C32] rounded-lg max-w-4xl mx-auto px-2 mb-6 text-white py-10">
             <div className="flex items-center justify-around ">
               <img
-                src="/clinton.jpg"
+                src={user?.image || "/clinton.jpg"}
                 alt="photo"
                 className="h-24 w-24  rounded-full  border-white border-2"
               />
               <div>
                 <h2 className="text-lg font-semibold">
-                  Welcome Billy doumbouya
+                  Welcome {user.lastName} {user.firstName} from {user.country}
                 </h2>
-                <p className="text-indigo-200 text-sm">clinton@gmail.com</p>
+                <p className="text-indigo-200 text-sm">{user.email}</p>
 
                 <div className="flex space-x-2 my-3">
-                  <button className="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded text-sm font-medium">
+                  <p className="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded text-sm font-medium">
                     Rank
-                  </button>
+                  </p>
+
                   <button className="bg-indigo-700 hover:bg-indigo-600 text-white px-4 py-2 rounded text-sm font-medium">
-                    Novice
+                    {user.rank}
                   </button>
                 </div>
               </div>
@@ -86,7 +133,7 @@ export default function Dashboard() {
                       Available Balance
                     </h4>
                     <p className="text-3xl font-bold text-gray-200 mb-4">
-                      300 USD
+                      $ {user.availableBalance}
                     </p>
                   </div>
                   <div className="space-y-3">
@@ -111,12 +158,14 @@ export default function Dashboard() {
                     <div className="space-y-4">
                       <div className="bg-green-400 rounded-lg p-4 text-white">
                         <p className="text-sm opacity-90">Total Earning</p>
-                        <p className="text-2xl font-bold">$3200.00</p>
+                        <p className="text-2xl font-bold">
+                          ${user.totalEarning}
+                        </p>
                       </div>
                       <div className="bg-white rounded-lg p-4 shadow-sm border">
                         <p className="text-sm text-gray-600">Total Earning</p>
                         <p className="text-2xl font-bold text-gray-900">
-                          $6200.00
+                          ${user.totalEarning}
                         </p>
                       </div>
                     </div>
@@ -131,13 +180,14 @@ export default function Dashboard() {
                       <div className="bg-white rounded-lg p-4 shadow-sm border">
                         <p className="text-sm text-gray-600">Payouts</p>
                         <p className="text-2xl font-bold text-gray-900">
-                          $2200.00
+                          {user.payouts}
                         </p>
                       </div>
                       <div className="bg-white rounded-lg p-4 shadow-sm border">
-                        <p className="text-sm text-gray-600">Total Downloads</p>
+                        <p className="text-sm text-gray-600">Referral total</p>
                         <p className="text-2xl font-bold text-gray-900">
-                          $2200.00
+                          {user.totalRefferal}{" "}
+                          {user.totalRefferal === 1 ? "person" : "people"}
                         </p>
                       </div>
                     </div>
@@ -151,7 +201,7 @@ export default function Dashboard() {
                   </h4>
                   <div className="bg-white rounded-lg p-4 shadow-sm border flex items-center justify-between">
                     <span className="text-sm text-gray-600 truncate">
-                      https://affinetsales/oluwatobilola34567
+                      {user.affiliateLink}
                     </span>
                     <button className="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded text-sm font-medium flex items-center ml-4">
                       <Copy className="w-4 h-4 mr-1" />

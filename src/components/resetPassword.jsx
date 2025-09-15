@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ArrowLeft, Eye, EyeOff, Key } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CircleLoader } from "react-spinners";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
@@ -17,6 +17,7 @@ export default function ResetPassword() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   //   find id and token using usesearchparams of react dom
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const token = searchParams.get("token");
@@ -26,23 +27,22 @@ export default function ResetPassword() {
     const newErrors = {};
 
     if (!newPassword) {
-      newErrors.newPassword = "Le nouveau mot de passe est requis";
+      newErrors.newPassword = "the new password is required";
     } else if (newPassword.length < 8) {
-      newErrors.newPassword =
-        "Le mot de passe doit contenir au moins 8 caractères";
+      newErrors.newPassword = "the password must contain 8 characteres";
     } else if (
       !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(
         newPassword
       )
     ) {
       newErrors.newPassword =
-        "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial";
+        "the new password must contain at least one capital letter, one lower letter, one digit and one special charactere";
     }
 
     if (!confirmPassword) {
-      newErrors.confirmPassword = "La confirmation du mot de passe est requise";
+      newErrors.confirmPassword = "confirm password is required";
     } else if (confirmPassword !== newPassword) {
-      newErrors.confirmPassword = "Les mots de passe ne correspondent pas";
+      newErrors.confirmPassword = "the passwords do not match";
     }
 
     setErrors(newErrors);
@@ -61,7 +61,13 @@ export default function ResetPassword() {
       // Simuler un appel API
 
       const res = await axios.patch(`${BASE_URL}/user/update-password`, data);
-      toast.success(res.message || "password update successfully");
+      setNewPassword("");
+      setConfirmPassword("");
+      toast.success(res.data.message || "password update successfully");
+
+      setTimeout(() => {
+        navigate("/auth/sign-in");
+      }, 2000);
       console.log(res);
     } catch (error) {
       console.error("error occured when updating:", error);
@@ -116,7 +122,6 @@ export default function ResetPassword() {
 
             <Link
               to="/auth/reset-password"
-              onClick={() => setIsSubmitted(false)}
               className="w-full flex items-center justify-center space-x-2 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />

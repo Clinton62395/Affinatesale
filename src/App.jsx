@@ -26,45 +26,47 @@ import {
   ClasscroomVideo,
 } from "./DashbordComponent/Classcroom.jsx";
 import NotFound from "./pages/notFound.jsx";
+import { Provider } from "./utils/user.Provider.jsx";
 
 function App() {
   return (
     <>
       <ToastContainer />
       {/* <HashRouter> */}
-      <Routes>
-        {/* landing page route */}
-        <Route path="/" element={<Home />} />
+      <Provider>
+        <Routes>
+          {/* landing page route */}
+          <Route path="/" element={<Home />} />
 
-        {/* registration routes */}
-        <Route path="/auth">
-          <Route path="sign-up" element={<SignUp />} />
-          <Route path="sign-up" element={<SignUp />} />
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="email" element={<CheckEmail />} />
-          <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="payement" element={<Payment />} />
-        </Route>
+          {/* registration routes */}
+          <Route path="/auth">
+            <Route path="sign-up" element={<SignUp />} />
+            <Route path="sign-in" element={<SignIn />} />
+            <Route path="email" element={<CheckEmail />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="reset-password" element={<ResetPassword />} />
+            <Route path="payement" element={<Payment />} />
+          </Route>
 
-        {/* Dashbord routes */}
-        <Route path="dashboard" element={<DashboardRoute />}>
-          <Route index element={<Dashboard />} />
-          <Route path="classroom" element={<Classroom />} />
-          <Route path="bonus" element={<Bonus />} />
-          <Route path="account-setting" element={<AcountSetting />} />
-          <Route path="live-session" element={<LiveSession />} />
-          <Route path="community" element={<Community />} />
-          <Route path="hot-new" element={<HotNew />} />
-          <Route path="top-earner" element={<TopEarners />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="logout" element={<Logout />} />
-          <Route path="classroom/info" element={<ClasscroomAbout />} />
-          <Route path="classroom/video" element={<ClasscroomVideo />} />
-        </Route>
+          {/* Dashbord routes */}
+          <Route path="dashboard" element={<DashboardRoute />}>
+            <Route index element={<Dashboard />} />
+            <Route path="classroom" element={<Classroom />} />
+            <Route path="bonus" element={<Bonus />} />
+            <Route path="account-setting" element={<AcountSetting />} />
+            <Route path="live-session" element={<LiveSession />} />
+            <Route path="community" element={<Community />} />
+            <Route path="hot-new" element={<HotNew />} />
+            <Route path="top-earner" element={<TopEarners />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="logout" element={<Logout />} />
+            <Route path="classroom/info" element={<ClasscroomAbout />} />
+            <Route path="classroom/video" element={<ClasscroomVideo />} />
+          </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Provider>
     </>
   );
 }

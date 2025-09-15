@@ -13,6 +13,7 @@ import axios from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
+import api from "../utils/axios";
 
 const loginSchema = yup.object({
   email: yup.string().email("invalid email").required("email is required"),
@@ -26,6 +27,7 @@ const loginSchema = yup.object({
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
 
@@ -39,17 +41,26 @@ function SignIn() {
 
   const onLogin = async (data) => {
     try {
-      const res = await axios.post(`${BASE_URL}/auth/login`, data);
-      console.log("user login ===>>>", data);
+      const res = await api.post("/auth/login", data);
       toast.success(res.data.message || "login succesfully");
+      console.log("user login ===>>>", data);
+
+      const userData = res.data.user || res.data.data;
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      setUser(userData);
+      console.log("all imformation brought about axios data", res.data);
+
       navigate("/dashboard");
     } catch (error) {
       console.error("error occured when login", error.message);
       if (error.response) {
         toast.error(error.response.data.message || "email is required");
-      }
-      {
+      } else if (error.request) {
+        console.log("network error");
         toast.error("network error, check your network");
+      } else {
+        toast.error("uninspected error occured");
       }
     }
   };
