@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 // const navigate = useNavigate();
 
-export const BASE_URL = "http://localhost:8800" || "http://localhost:3000";
+export const BASE_URL =
+  "http://localhost:8800" || "https://affinetsales.onrender.com";
 
 // Création d'une instance Axios personnalisée.
 const api = axios.create({
