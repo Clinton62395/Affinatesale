@@ -14,17 +14,15 @@ export const Logout = () => {
       const refresh = localStorage.getItem("refreshToken");
 
       //   delete token variable
-      localStorage.removeItem(access);
-      localStorage.removeItem(refresh);
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       navigate("/");
       setIsLoaging(false);
     }, 1000);
-
-    console.log("deconnexion", refresh, access);
   };
   return (
     <>
-      <div className=" min-h-screen">
+      <div className=" min-h-screen  inline-block justify-center md:justify-start">
         <button
           onClick={logout}
           disabled={isLoading}

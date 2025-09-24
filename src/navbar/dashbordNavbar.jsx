@@ -36,23 +36,23 @@ export const DashboardNav = ({ isOpen, toggleSidebar }) => {
     <div
       className={`${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      } fixed inset-y-0 left-0 z-40 w-64 bg-[#170C32] transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative`}
+      } w-64 bg-[#170C32] h-screen transform transition-transform duration-300 ease-in-out lg:translate-x-0`}
     >
-      <div className="flex justify-between items-center mt-2">
+      <div className="h-16 flex items-center justify-between px-4 border-b border-indigo-900">
         <img
           src="/logo.png"
           alt="logo"
-          className="h-10 mx-3 lg:hidden invert brightness-0"
+          className="h-10 lg:hidden invert brightness-0"
         />
         <button
           onClick={toggleSidebar}
-          className="lg:hidden text-gray-300 hover:text-black transition-all duration-300 hover:bg-white flex justify-center items-center w-7 h-7 rounded-full transform  hover:rotate-[90deg]"
+          className="lg:hidden text-gray-300 hover:text-white transition-all duration-300 hover:bg-indigo-800 flex justify-center items-center w-8 h-8 rounded-full"
         >
-          <X size={24} />
+          <X size={20} />
         </button>
       </div>
-      <nav className="mt-6 px-3">
-        <ul className="space-y-1">
+      <nav className="p-4 overflow-y-auto h-[calc(100vh-4rem)]">
+        <ul className="space-y-2">
           {menuItems.map((item, index) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;

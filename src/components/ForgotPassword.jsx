@@ -5,7 +5,7 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 
 import { toast } from "react-toastify";
-import { BASE_URL } from "../utils/constant";
+import api from "../utils/axios";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ export default function ForgotPassword() {
     setIsLoading(true);
 
     try {
-      const res = await axios.post(`${BASE_URL}/user/reset-password`, data);
+      const res = await api.post(`/user/reset-password`, data);
       toast.success(res.data.message || "email of password updating was sent ");
     } catch (error) {
       console.error(error.message);

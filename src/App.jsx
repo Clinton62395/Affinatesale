@@ -11,7 +11,7 @@ import ResetPassword from "./components/resetPassword.jsx";
 import Payment from "./components/payment.jsx";
 import ForgotPassword from "./components/ForgotPassword.jsx";
 import { Classroom } from "./DashbordComponent/DashbordContent.jsx";
-import Dashboard from "./pages/Dashbord.jsx";
+// import { Dashboard } from "./pages/Dashboard.jsx";
 import { AcountSetting } from "./DashbordComponent/account.jsx";
 import { LiveSession } from "./DashbordComponent/liveSession.jsx";
 import { Community } from "./DashbordComponent/community.jsx";
@@ -27,6 +27,8 @@ import {
 } from "./DashbordComponent/Classcroom.jsx";
 import NotFound from "./pages/notFound.jsx";
 import { Provider } from "./utils/user.Provider.jsx";
+import { ProtectRoute } from "./components/ProtectRoute.jsx";
+import Dashboard from "./pages/Dashboard.new.jsx";
 
 function App() {
   return (
@@ -49,7 +51,14 @@ function App() {
           </Route>
 
           {/* Dashbord routes */}
-          <Route path="dashboard" element={<DashboardRoute />}>
+          <Route
+            path="dashboard"
+            element={
+              <ProtectRoute>
+                <DashboardRoute />
+              </ProtectRoute>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path="classroom" element={<Classroom />} />
             <Route path="bonus" element={<Bonus />} />

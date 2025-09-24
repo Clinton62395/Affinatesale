@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { CircleLoader } from "react-spinners";
 import { auth, provider, signInWithPopup, fProvider } from "../config/firebase";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react";
-import { BASE_URL } from "../utils/constant";
 import api from "../utils/axios";
+
+import { UserContext } from "../utils/userContext";
 
 //  Définir le schema OUTSIDE du composant
 const schema = yup.object({
@@ -34,9 +35,21 @@ const schema = yup.object({
 });
 
 function SignUp() {
-  //  UN SEUL système de gestion de formulaire
-
   const [user, setUser] = useState(null);
+  const [referralCode, setReferralCode] = useState("");
+  const [readOnlyCode, setReadOnlyCode] = useState(false);
+  const { setError, clearError } = useContext(UserContext);
+
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    const userRefCode = searchParams.get("ref");
+
+    if (userRefCode) {
+      setReferralCode(userRefCode);
+      setReadOnlyCode(true);
+    }
+  }, [searchParams]);
+
   const {
     register,
     handleSubmit,
@@ -50,16 +63,18 @@ function SignUp() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Fonction de soumission CORRECTE
   const onSubmit = async (data) => {
-    console.log("Form fexthed envoyees depuis le backend:", data); // ✅ Données réelles du formulaire
-
+    data.referralCode = referralCode;
     try {
       const res = await api.post("/auth/register", data);
+      console.log("Form data sent from frontend:==>", data); // ✅ Données réelles du formulaire
       if (res.status === 201) {
         toast.success(res.data.message || "Registered successfully");
 
         const user = res.data.user || res.data.data;
+
+        const token = res.data.accessToken;
+        const refresh = res.data.refreshToken;
         console.log(
           "this all information about data from backend =====>",
           res.data
@@ -67,15 +82,18 @@ function SignUp() {
 
         if (user) {
           localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("accessToken", token);
+          localStorage.setItem("refreshToken", refresh);
         }
         setUser(user);
+        setError(null);
 
         navigate("/dashboard");
       }
     } catch (error) {
       console.error("Registration error:", error);
       if (error.response) {
-        toast.error(error.response.data.message || "Registration failed");
+        toast.error(error.response?.data.message || "Registration failed");
       } else if (error.request) {
         toast.error("Network error");
       } else {
@@ -284,6 +302,8 @@ function SignUp() {
             <input
               type="text"
               {...register("referralCode")}
+              value={referralCode}
+              readOnly={readOnlyCode}
               placeholder="Referral Code (Optional)"
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
@@ -297,7 +317,7 @@ function SignUp() {
             >
               <option value="">Select a country</option>
               {countries.map((country) => (
-                <option key={country.cca2} value={country.cca2}>
+                <option key={country.cca2} value={country.common}>
                   {country.name.common}
                 </option>
               ))}

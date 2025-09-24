@@ -11,30 +11,45 @@ function DashboardRoute() {
     setIsopen(!isOpen);
   };
   return (
-    <>
-      <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <DashboardNav isOpen={isOpen} toggleSidebar={toggleSidebar} />{" "}
-        <div className=" flex-1 flex-col  ">
-          <header className="p-4 z-50  bg-white shadow-md flex items-center h-16 justify-between">
-            <button
-              onClick={toggleSidebar}
-              className="lg:hidden text-end text-[#111112] hover:text-[#d5b7f3] hover:bg-black h-8 w-8 rounded-full flex justify-center items-center transition-all duration-300"
-            >
-              <Menu size={20} />
-            </button>
-            <img src="/logo.png" alt="logo" className="h-14" />
-          </header>
+    <div className="min-h-screen bg-gray-50">
+      {/* Layout Container */}
+      <div className="flex">
+        {/* Sidebar - Fixed position */}
+        <aside className="fixed top-0 left-0 z-40 h-screen transition-transform">
+          <DashboardNav isOpen={isOpen} toggleSidebar={toggleSidebar} />
+        </aside>
 
-          <main className="flex-1  p-4">
-            <Outlet />
-            <footer className="mt-10 flex">
-              <Footer /> {/* Contenu de la route enfant */}
-            </footer>
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-h-screen lg:ml-64">
+          {" "}
+          {/* Add margin to prevent sidebar overlap */}
+          {/* Header - Fixed */}
+          <header className="fixed top-0 right-0 left-0 lg:left-64 z-30 bg-white shadow-md">
+            <div className="flex items-center justify-between h-16 px-4">
+              <button
+                onClick={toggleSidebar}
+                className="lg:hidden text-[#111112] hover:text-[#d5b7f3] hover:bg-black h-8 w-8 rounded-full flex justify-center items-center transition-all duration-300"
+              >
+                <Menu size={20} />
+              </button>
+              <img src="/logo.png" alt="logo" className="h-14" />
+            </div>
+          </header>
+          {/* Main Content - Scrollable */}
+          <main className="flex-grow mt-16 p-4 overflow-auto">
+            <div className="container mx-auto">
+              <Outlet />
+            </div>
           </main>
+          {/* Footer - Always at bottom */}
+          <footer className="mt-auto bg-white shadow-inner">
+            <div className="container mx-auto">
+              <Footer />
+            </div>
+          </footer>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export default DashboardRoute;

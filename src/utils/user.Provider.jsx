@@ -7,8 +7,15 @@ import { UserContext } from "./userContext";
 export const Provider = ({ children }) => {
   const navigate = useNavigate();
   //   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken")
+  );
+
+  const clearError = () => {
+    setError(null);
+  };
 
   const [user, setUser] = useState({
     firstName: "",
@@ -26,16 +33,16 @@ export const Provider = ({ children }) => {
     image: "",
 
     bank: {
-      orangeMoney: "",
-      opay: "",
-      mobileMoney: "",
+      orangeMoney: "orange Money",
+      opay: "opay",
+      mobileMoney: "mobile Money",
     },
 
     currency: "USD",
 
     bankDetails: {
       accountname: "",
-      accountNo: 0,
+      accountNo: 112255,
       bank: "",
     },
 
@@ -44,65 +51,84 @@ export const Provider = ({ children }) => {
     },
   });
 
-  useEffect(() => {
-    const saved = localStorage.getItem("user");
-    if (saved) {
-      const dataParse = JSON.parse(saved);
-      setUser((prevUser) => ({ ...prevUser, ...dataParse }));
-    }
-    const getUserDashboard = async () => {
-      try {
-        const res = await api.get("fetch-dashboard-statistic");
-        if (res) {
-          toast.success(
-            res.data.message || res.message || "user info fetched successfully"
-          );
+  const getUserDashboard = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
 
-          console.log("full info about user ", res);
-          const userData = res.data.user || res.data.data;
-          console.log("les informations de user", userData);
+      const res = await api.get("/user/fetch-dashboard-statistic");
+      if (res?.data) {
+        console.log("full info about user ", res);
+        const userData = res.data.user || res.data.data;
+        console.log("les informations de user", userData);
 
-          setUser((prevUser) => ({ ...prevUser, ...userData }));
-          localStorage.setItem("user", JSON.stringify(userData));
-        }
-      } catch (err) {
-        let errorMsg = " an uninspected error occured";
+        setUser((prevUser) => ({ ...prevUser, ...userData }));
+        localStorage.setItem("user", JSON.stringify(userData));
+      }
+    } catch (err) {
+      let errorMsg = " an unexpected  error occured";
+      console.error("error when fetching user data", err);
 
-        console.error("error when fetching user data", err);
-        if (err.response) {
-          toast.error(errorMsg || "error when fetching user data ");
-          errorMsg =
-            err.response?.data.message || "error when fetching user data";
-        }
-        if (err.response.status === 401) {
-          errorMsg = "token expired, please login again";
-
-          setError(errorMsg);
-          toast.error(errorMsg);
-
-          setTimeout(() => {
-            navigate("/auth/sign-in");
-          }, 1000);
-
-          return;
-        } else if (err.response) {
-          errorMsg =
-            err.response?.data.message || "error when fetching user data";
-        } else if (err.request) {
-          errorMsg = "network error occured";
-        }
+      if (err.response?.status === 401) {
+        errorMsg = "token expired, please login again";
 
         setError(errorMsg);
         toast.error(errorMsg);
+
+        setTimeout(() => {
+          navigate("/auth/sign-in");
+        }, 1000);
+
+        return;
       }
-    };
 
-    getUserDashboard();
-  }, []);
+      if (err.response) {
+        errorMsg =
+          err.response?.data?.message || "error when fetching user data";
+      } else if (err.request) {
+        errorMsg = "network error occured";
+      }
 
-  return (
-    <UserContext.Provider value={{ user, isLoading, error }}>
-      {children}
-    </UserContext.Provider>
-  );
+      setError(errorMsg);
+      toast.error(errorMsg);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const saved = localStorage.getItem("user");
+    if (saved) {
+      try {
+        const dataParse = JSON.parse(saved);
+        setUser((prevUser) => {
+          const updateUser = { ...prevUser, ...dataParse };
+
+          localStorage.setItem("user", JSON.stringify(updateUser));
+          setIsLoading(false);
+          return updateUser;
+        });
+      } catch (err) {
+        console.error("error when parsing", err);
+        localStorage.removeItem("user");
+        setIsLoading(false);
+      }
+    }
+
+    if (accessToken) {
+      getUserDashboard();
+    } else {
+      setIsLoading(false);
+    }
+  }, [accessToken, navigate]);
+
+  const values = {
+    user,
+    isLoading,
+    getUserDashboard,
+    error,
+    setError,
+    clearError,
+  };
+  return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
 };

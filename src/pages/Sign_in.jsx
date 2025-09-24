@@ -12,7 +12,6 @@ import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constant";
 import api from "../utils/axios";
 
 const loginSchema = yup.object({
@@ -47,6 +46,12 @@ function SignIn() {
 
       const userData = res.data.user || res.data.data;
       localStorage.setItem("user", JSON.stringify(userData));
+
+      const token = res.data.accessToken;
+      const refresh = res.data.refreshToken;
+
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("refreshToken", refresh);
 
       setUser(userData);
       console.log("all imformation brought about axios data", res.data);

@@ -5,7 +5,7 @@ import { CircleLoader } from "react-spinners";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../utils/constant";
+import api from "../utils/axios";
 
 export default function ResetPassword() {
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -60,7 +60,7 @@ export default function ResetPassword() {
       const data = { newPassword, token, id };
       // Simuler un appel API
 
-      const res = await axios.patch(`${BASE_URL}/user/update-password`, data);
+      const res = await api.patch(`/user/update-password`, data);
       setNewPassword("");
       setConfirmPassword("");
       toast.success(res.data.message || "password update successfully");
