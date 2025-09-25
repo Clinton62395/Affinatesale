@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { DashboardNav } from "../../navbar/dashbordNavbar";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import React from "react";
 import { Footer } from "../../components/footer";
 
@@ -15,7 +15,7 @@ function DashboardRoute() {
       {/* Layout Container */}
       <div className="flex">
         {/* Sidebar - Fixed position */}
-        <aside className="fixed top-0 left-0 z-40 h-screen transition-transform">
+        <aside className="fixed top-0 left-0 z-48 h-screen transition-transform">
           <DashboardNav isOpen={isOpen} toggleSidebar={toggleSidebar} />
         </aside>
 
@@ -30,7 +30,7 @@ function DashboardRoute() {
                 onClick={toggleSidebar}
                 className="lg:hidden text-[#111112] hover:text-[#d5b7f3] hover:bg-black h-8 w-8 rounded-full flex justify-center items-center transition-all duration-300"
               >
-                <Menu size={20} />
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
               <img src="/logo.png" alt="logo" className="h-14" />
             </div>

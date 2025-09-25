@@ -596,14 +596,20 @@ function Home() {
 
           {/* Enhanced Call-to-Action */}
           <div className="text-center mt-16 p-8 bg-gradient-to-r from-green-600/20 to-blue-600/20 rounded-2xl border border-green-500/30">
-            <h3 className="font-bold text-3xl text-white mb-4">
+            <Link
+              to="/auth/sign-up"
+              className="font-bold text-3xl text-white mb-4"
+            >
               Are you ready to get started now?
-            </h3>
+            </Link>
             <p className="text-gray-300 mb-6 text-lg">
               Join hundreds of successful students and start your journey today!
             </p>
 
-            <Link to="/auth/sign-up" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg">
+            <Link
+              to="/auth/sign-up"
+              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg"
+            >
               Sign Up Now →
             </Link>
 

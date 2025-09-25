@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <footer className="container  bg-yellow-100 text-start w-full mx-auto max-w-full">
       <div className=" flex justify-between  max-w-6xl px-5 mx-auto ">
-        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-5  py-4 mx-auto  ">
+        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-2  py-4 mx-auto  ">
           <div className="flex flex-col">
             <h6 className="font-bold mb-2">Services</h6>
             <Link>Dashboard</Link>

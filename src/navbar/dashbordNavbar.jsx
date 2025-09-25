@@ -19,6 +19,8 @@ import { Link, useLocation } from "react-router-dom";
 export const DashboardNav = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
 
+  const isActive = location.pathname === "/dashboard/logout";
+
   const menuItems = [
     { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
     { name: "Classroom", icon: GraduationCap, path: "/dashboard/classroom" },
@@ -29,7 +31,6 @@ export const DashboardNav = ({ isOpen, toggleSidebar }) => {
     { name: "Live Session", icon: Users, path: "/dashboard/live-session" },
     { name: "Community", icon: Users, path: "/dashboard/community" },
     { name: "Settings", icon: Settings, path: "/dashboard/settings" },
-    // { name: "Settings", icon: CircleArrowOutUpLeft, path: "/dashboard/logout" },
   ];
 
   return (
@@ -74,10 +75,14 @@ export const DashboardNav = ({ isOpen, toggleSidebar }) => {
             );
           })}
 
-          <li className="pt-3 border-t border-indigo-700 mt-4">
+          <li className="pt-3 border-t border-indigo-700 mt-4 w-full">
             <Link
               to="/dashboard/logout"
-              className="flex items-center px-3 py-2 text-sm font-medium text-gray-300 rounded-lg hover:text-white hover:bg-indigo-800 transition-colors duration-200"
+              className={` ${
+                isActive
+                  ? "bg-green-500 text-white"
+                  : "text-gray-300 hover:text-white hover:bg-indigo-800"
+              }  pt-3 border-t border-indigo-700 mt-4 flex items-center w-full p-2 rounded-lg transition-colors duration-200 `}
             >
               <LogOut className="mr-3 h-4 w-4" />
               Logout
