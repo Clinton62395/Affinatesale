@@ -7,7 +7,7 @@ export const BASE_URL = "http://localhost:8800";
 
 // Création d'une instance Axios personnalisée.
 const api = axios.create({
-  baseURL: BASE_URL || import.meta.env.BAKEND_URL,
+  baseURL: BASE_URL || import.meta.env.BACKEND_URL,
   withCredentials: true,
 });
 
