@@ -1,5 +1,6 @@
 import React from "react";
 import { Play } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const LiveSession = () => {
   return (
@@ -37,9 +38,14 @@ export const LiveSession = () => {
 
       {/* Join Button */}
       <div className="flex justify-center">
-        <button className="bg-green-500 hover:bg-green-600 text-white px-12 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg">
+        <a
+          href="https://www.linkedin.com/in/billy-doumbouya-17b330212"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-green-500 hover:bg-green-600 text-white px-12 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg"
+        >
           Join
-        </button>
+        </a>
       </div>
     </div>
   );
