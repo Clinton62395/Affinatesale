@@ -22,7 +22,7 @@ export const Logout = () => {
   };
   return (
     <>
-      <div className=" min-h-screen  inline-block justify-center md:justify-start">
+      <div className=" min-h-screen ml-64 md:ml-2 inline-block justify-center md:justify-start">
         <button
           onClick={logout}
           disabled={isLoading}

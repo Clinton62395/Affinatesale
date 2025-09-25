@@ -1,14 +1,17 @@
-
+import React, { useContext } from "react";
+import { UserContext } from "../utils/userContext";
 export const Bonus = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <>
       <div className=" mx-auto w-full mt-5 ">
         <div className="flex items-center justify-between pb-5">
           <h3 className="#000000 semibold">Learn and Earn</h3>
           <img
-            src="/clinton.jpg"
+            src={user.image || "/Portrait_Placeholder.png"}
             className="w-10 h-10 rounded-full"
-            alt="photo"
+            alt={user.firsName}
           />
         </div>
         <div className="mt-10">

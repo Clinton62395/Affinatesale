@@ -24,7 +24,7 @@ export const ClasscroomAbout = () => {
         <img
           src={user?.image || "/Portrait_Placeholder.png"}
           className="w-14 h-14 rounded-full"
-          alt="photo"
+          alt={user?.firsName}
         />
       </div>
 
@@ -366,7 +366,7 @@ export const ClasscroomVideo = () => {
           <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white text-xs font-bold">
             <img
               src={user.image || "/Portrait_Placeholder.png"}
-              alt="photo"
+              alt={user.firsName}
               className="h-24 w-24 rounded-full"
             />
           </div>
