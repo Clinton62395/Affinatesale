@@ -116,7 +116,7 @@ export const TransferForm = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1000]">
       <div className="bg-[#271A44] rounded-xl p-6 w-full max-w-md relative">
         <button
           onClick={onClose}

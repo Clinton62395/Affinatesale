@@ -15,7 +15,7 @@ function DashboardRoute() {
       {/* Layout Container */}
       <div className="flex">
         {/* Sidebar - Fixed position */}
-        <aside className="fixed top-0 left-0 z-48 h-screen transition-transform">
+        <aside className="fixed top-0 left-0 z-30 h-screen transition-transform">
           <DashboardNav isOpen={isOpen} toggleSidebar={toggleSidebar} />
         </aside>
 
@@ -24,19 +24,19 @@ function DashboardRoute() {
           {" "}
           {/* Add margin to prevent sidebar overlap */}
           {/* Header - Fixed */}
-          <header className="fixed top-0 right-0 left-0 lg:left-64 z-30 bg-white shadow-md">
+          <header className="fixed top-0 right-0 left-0  z-40 bg-white shadow-md">
             <div className="flex items-center justify-between h-16 px-4">
-              <button
+              <button 
                 onClick={toggleSidebar}
                 className="lg:hidden text-[#111112] hover:text-[#d5b7f3] hover:bg-black h-8 w-8 rounded-full flex justify-center items-center transition-all duration-300"
               >
                 {isOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
-              <img src="/logo.png" alt="logo" className="h-14" />
+              <img src="/logo.png" alt="logo" className="h-14"/>
             </div>
           </header>
           {/* Main Content - Scrollable */}
-          <main className="flex-grow mt-16 p-4 overflow-auto">
+          <main className="flex-grow mt-16 p-4 overflow-auto relative z-20">
             <div className="container mx-auto">
               <Outlet />
             </div>

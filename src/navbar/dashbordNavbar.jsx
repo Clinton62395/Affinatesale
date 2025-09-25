@@ -37,7 +37,7 @@ export const DashboardNav = ({ isOpen, toggleSidebar }) => {
     <div
       className={`${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      } w-64 bg-[#170C32] h-screen transform transition-transform duration-300 ease-in-out lg:translate-x-0`}
+      } w-48  md:w-64 bg-[#170C32] h-screen transform transition-transform duration-300 ease-in-out lg:translate-x-0`}
     >
       <div className="h-16 flex items-center justify-between px-4 border-b border-indigo-900">
         <img

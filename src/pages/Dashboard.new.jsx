@@ -19,6 +19,7 @@ export default function Dashboard() {
   const [showTransferForm, setShowTransferForm] = useState(false);
   const [copyStatus, setCopyStatus] = useState("Copy");
   const [linkCopyStatus, setLinkCopyStatus] = useState("Copy Link");
+  // const [isHover, setIsHover] = useState(true);
 
   const { user, isLoading, error, getUserDashboard } = useContext(UserContext);
   useEffect(() => {
@@ -100,7 +101,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50 ">
       {/* Main content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
@@ -124,7 +125,7 @@ export default function Dashboard() {
                 </div>
                 <div className="relative">
                   <img
-                    src={user?.image || "/clinton.jpg"}
+                    src={user?.image || "/Portrait_Placeholder.png"}
                     className="w-10 h-10 rounded-full border-2 border-green-400 object-cover"
                     alt={`${user.firstName}'s profile`}
                   />
@@ -143,12 +144,12 @@ export default function Dashboard() {
               <div className="absolute inset-0 bg-grid-white/[0.05] pointer-events-none"></div>
               <div className="px-6 py-8 sm:px-10 sm:py-12">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-                  <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-4 md:gap-6">
                     <div className="relative">
                       <img
-                        src={user?.image || "/clinton.jpg"}
+                        src={user?.image || "/Portrait_Placeholder.png"}
                         alt={`${user.firstName}'s profile`}
-                        className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-4 border-white/20 shadow-xl"
+                        className="  h-12 w-12 md:h-20 md:w-20   rounded-full border-4 border-white/20 shadow-xl"
                       />
                       <div className="absolute -bottom-2 -right-2 bg-green-400 text-white text-xs px-2 py-1 rounded-full shadow-lg">
                         Active
@@ -217,7 +218,11 @@ export default function Dashboard() {
                       <ArrowLeftRight className="w-4 h-4 mr-2" />
                       Transfer
                     </button>
+
                     <button
+                      onClick={() =>
+                        alert("Deposit function will be available soon!")
+                      }
                       aria-label="Deposit Funds"
                       className="inline-flex items-center justify-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl text-sm font-semibold transition-all"
                     >
@@ -319,13 +324,13 @@ export default function Dashboard() {
                     </p>
                   )}
                 </div>
-                <button
+                {/* <button
                   onClick={handleCopyAffiliateLink}
                   className="inline-flex items-center justify-center px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-semibold transition-all shadow-lg hover:shadow-purple-500/25 whitespace-nowrap"
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   Copy Link
-                </button>
+                </button> */}
               </div>
             </div>
 

@@ -1,21 +1,28 @@
-import { ArrowLeft, Globe, Settings, SmartphoneCharging, Star } from "lucide-react";
-import { useState } from "react";
+import {
+  ArrowLeft,
+  Globe,
+  Settings,
+  SmartphoneCharging,
+  Star,
+} from "lucide-react";
+import { useState, useContext } from "react";
 import React from "react";
-import { Footer } from "../components/footer";
 import { ContentClassroom } from "../components/ContentClassroom";
 import { ReviewClassroom } from "../components/ReviewClassroom";
 import { AboutClassroom } from "../components/AboutClassroom";
-import { Link, Links } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { UserContext } from "../utils/userContext";
 
 export const ClasscroomAbout = () => {
   const [activeTab, setActiveTab] = useState("about");
+  const { user } = useContext(UserContext);
   return (
     <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between p-4 bg-white border-b">
         <h1 className="text-xl font-semibold text-gray-900">Learn and Earn</h1>
         <img
-          src="/clinton.jpg"
+          src={user?.image || "/Portrait_Placeholder.png"}
           className="w-14 h-14 rounded-full"
           alt="photo"
         />
@@ -325,6 +332,7 @@ export const ClasscroomAbout = () => {
 export const ClasscroomVideo = () => {
   const [currentVideo, setCurrentVideo] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const { user } = useContext(UserContext);
 
   const videoLessons = [
     { title: "Introduction", duration: "00:07:06" },
@@ -348,13 +356,16 @@ export const ClasscroomVideo = () => {
           to="/dashboard/classroom/info"
           className="text-lg font-medium text-gray-900 flex gap-2 items-center"
         >
-          <ArrowLeft size={24} className="text-black font-extrabold transform hover:-translate-x-2 transition-all duration-300 hover:text-blue-500 "/>
+          <ArrowLeft
+            size={24}
+            className="text-black font-extrabold transform hover:-translate-x-2 transition-all duration-300 hover:text-blue-500 "
+          />
           Learn and Earn
         </Link>
         <div className="w-8 h-8 rounded-full bg-orange-400 overflow-hidden">
           <div className="w-full h-full bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white text-xs font-bold">
             <img
-              src="/clinton.jpg"
+              src={user.image || "/Portrait_Placeholder.png"}
               alt="photo"
               className="h-24 w-24 rounded-full"
             />
