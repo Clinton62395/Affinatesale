@@ -7,22 +7,11 @@
 }
 body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
 }
-/* .backround{
-  background-image: url("backround.png"); 
-  background-position: center; 
-  background-repeat: no-repeat;
-  background-size: cover;
 
-} */
 
 /* logo */
-.logo{
-position: absolute;
-width: 258px;
-height: 120.75px;
-left: 123px;
-top: 27.54px;
-}
+
 
 
