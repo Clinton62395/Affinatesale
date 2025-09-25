@@ -632,7 +632,7 @@ export const PictureChange = () => {
 
       const formData = new FormData();
       formData.append("file", picture.file);
-      const res = await axios.post(`${BASE_URL}/user/upload-file`, formData);
+      const res = await api.post(`/user/upload-file`, formData);
       if (res) {
         res.data;
         setPicture({
