@@ -172,12 +172,12 @@ function SignIn() {
               >
                 Sign up
               </Link>
-              <Link
+              {/* <Link
                 to="/auth/reset-password"
                 className="text-green-400 hover:text-green-500 font-medium"
               >
                 reset-password
-              </Link>
+              </Link> */}
             </p>
           </form>
         </div>
