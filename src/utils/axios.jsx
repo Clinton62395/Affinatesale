@@ -8,7 +8,7 @@ export const BASE_URL = "http://localhost:8800";
 // Création d'une instance Axios personnalisée.
 const api = axios.create({
   baseURL: BASE_URL || import.meta.env.BAKEND_URL,
-  // withCredentials: true,
+  withCredentials: true,
 });
 
 // Variable pour stocker la promesse de la requête de rafraîchissement du jeton.
