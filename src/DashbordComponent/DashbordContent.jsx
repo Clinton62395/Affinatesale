@@ -1,17 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Footer } from "../components/footer";
 import { Menu, X } from "lucide-react";
 import { Link, Links } from "react-router-dom";
-
-
-
+import { UserContext } from "../utils/userContext";
 
 export const Classroom = () => {
+  const { user } = useContext(UserContext);
   return (
     <>
       <div className=" px-2 ">
         <div className=" py-3 bg-white/90">
-        
           <div className="flex justify-between items-center px-4 ">
             <div>
               <h5>Learn and Earn</h5>
@@ -24,8 +22,8 @@ export const Classroom = () => {
                 <option value="E">Euro</option>
               </select>
               <img
-                src="/clinton.jpg"
-                alt="photo"
+                src={user?.image || "/Portrait_Placeholder.png"}
+                alt={user?.firstName}
                 className="h-8 w-8 rounded-full border-2 border-black "
               />
             </div>
