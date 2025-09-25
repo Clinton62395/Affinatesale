@@ -308,9 +308,12 @@ function Home() {
             <p className="text-white text-xl mb-6">
               Ready to join these success stories?
             </p>
-            <button className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+            <Link
+              to="/auth/sign-up"
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
               Get Started Today
-            </button>
+            </Link>
           </div>
         </div>
 
